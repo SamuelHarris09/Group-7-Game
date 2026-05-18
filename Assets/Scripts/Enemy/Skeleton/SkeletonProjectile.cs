@@ -43,7 +43,7 @@ public class SkeletonProjectile : MonoBehaviour
         {
             direction = leftSpeed;
         }
-        else if (skeletonAI.GetFacingLeft())
+        else if (skeletonAI.GetFacingLeft()) 
         {
             direction = rightSpeed;
         }
