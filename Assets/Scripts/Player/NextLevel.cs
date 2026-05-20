@@ -19,12 +19,10 @@ public class NextLevel : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_EDITOR
         if (Keyboard.current.nKey.wasPressedThisFrame)
         {
             LoadNextScene();
         }
-#endif
     }
 
     private void OnTriggerEnter2D(Collider2D other)

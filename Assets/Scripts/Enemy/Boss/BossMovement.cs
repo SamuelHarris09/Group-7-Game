@@ -392,8 +392,6 @@ public class BossMovement : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_EDITOR
-
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
             SetWave(BossState.Wave1);
 
@@ -402,7 +400,6 @@ public class BossMovement : MonoBehaviour
 
         if (Keyboard.current.digit3Key.wasPressedThisFrame)
             SetWave(BossState.Wave3);
-#endif
     }
 
     public void SetWave(BossState newState)
