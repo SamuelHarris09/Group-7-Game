@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] public float maxHealth = 100f;
+    [SerializeField] private float bossStage = 5f;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] GameObject deathMenu;
     public float currentHealth;
@@ -35,25 +37,32 @@ public class Health : MonoBehaviour
     #region Damage
     private void OnTriggerEnter2D(Collider2D other)
     {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+
         enemyDamageDealer = other.GetComponent<EnemyDamageDealer>();
 
         if (enemyDamageDealer != null)
         { 
-           TakeDamage(enemyDamageDealer.GetDamage());
+            TakeDamage(enemyDamageDealer.GetDamage());
+            Debug.Log(currentHealth);
         } 
-
-        if (other.CompareTag("BossHand"))
+        if (currentSceneIndex == bossStage)
         {
-            if (bossTakeHit > 4f)
+            if (other.CompareTag("BossHand"))
             {
-                Die();
-                bossMovement.StopAllCoroutines();
-            }
-            else if (bossTakeHit < 4f)
-            {
-                bossTakeHit++;
+                if (bossTakeHit > 4f)
+                {
+                    Die();
+                    bossMovement.StopAllCoroutines();
+                }
+                else if (bossTakeHit < 4f)
+                {
+                    bossTakeHit++;
+                }
             }
         }
+        
     }
 
     void TakeDamage(int enemyDamage)

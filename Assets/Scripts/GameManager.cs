@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
         if (pauseScreen != null)
         {
             pauseScreen.SetActive(false);
+            Debug.Log("No Pause Menu avalible");
         }
 
         if (scene.buildIndex < gamePlayLevelCount)
