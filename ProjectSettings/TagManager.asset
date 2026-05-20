@@ -16,7 +16,6 @@ TagManager:
   - Gambling Machine
   - PauseMenu
   - DeathMenu
-  - BossHand
   layers:
   - Default
   - TransparentFX

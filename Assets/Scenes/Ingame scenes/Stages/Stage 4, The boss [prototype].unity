@@ -301,9 +301,10 @@ GameObject:
   m_Component:
   - component: {fileID: 125867104}
   - component: {fileID: 125867105}
+  - component: {fileID: 125867106}
   m_Layer: 0
   m_Name: Hand Wave 3
-  m_TagString: BossHand
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -382,6 +383,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &125867106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125867103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca6aa6587d2935478fb5faa45e6b67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageDealer
+  enemyDamage: 10
 --- !u!1 &181267810
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,9 +749,10 @@ GameObject:
   m_Component:
   - component: {fileID: 379640711}
   - component: {fileID: 379640710}
+  - component: {fileID: 379640712}
   m_Layer: 0
   m_Name: Right Hand
-  m_TagString: BossHand
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -816,6 +831,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2140849446587698710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &379640712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379640709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca6aa6587d2935478fb5faa45e6b67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageDealer
+  enemyDamage: 10
 --- !u!1 &380642421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,7 +1158,7 @@ GameObject:
   - component: {fileID: 601095334}
   m_Layer: 0
   m_Name: Visuals
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1964,9 +1992,10 @@ GameObject:
   m_Component:
   - component: {fileID: 753045977}
   - component: {fileID: 753045976}
+  - component: {fileID: 753045978}
   m_Layer: 0
   m_Name: Left Hand
-  m_TagString: BossHand
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2045,6 +2074,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2140849446587698710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &753045978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753045975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca6aa6587d2935478fb5faa45e6b67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageDealer
+  enemyDamage: 10
 --- !u!1 &854108057
 GameObject:
   m_ObjectHideFlags: 0
@@ -4657,7 +4699,7 @@ GameObject:
   - component: {fileID: 2022215023}
   m_Layer: 0
   m_Name: Weak Point Indicator
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5124,9 +5166,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2732444802560132208}
   - component: {fileID: 959395062586573624}
+  - component: {fileID: 2732444802560132209}
   m_Layer: 0
   m_Name: Hand Wave 1
-  m_TagString: BossHand
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5259,6 +5302,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2140849446587698710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2732444802560132209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116932476576175832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca6aa6587d2935478fb5faa45e6b67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageDealer
+  enemyDamage: 10
 --- !u!4 &3400847017617887034
 Transform:
   m_ObjectHideFlags: 0
@@ -5445,7 +5501,7 @@ GameObject:
   - component: {fileID: 5908249955270600613}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

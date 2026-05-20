@@ -37,9 +37,6 @@ public class Health : MonoBehaviour
     #region Damage
     private void OnTriggerEnter2D(Collider2D other)
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
-
         enemyDamageDealer = other.GetComponent<EnemyDamageDealer>();
 
         if (enemyDamageDealer != null)
@@ -47,22 +44,6 @@ public class Health : MonoBehaviour
             TakeDamage(enemyDamageDealer.GetDamage());
             Debug.Log(currentHealth);
         } 
-        if (currentSceneIndex == bossStage)
-        {
-            if (other.CompareTag("BossHand"))
-            {
-                if (bossTakeHit > 4f)
-                {
-                    Die();
-                    bossMovement.StopAllCoroutines();
-                }
-                else if (bossTakeHit < 4f)
-                {
-                    bossTakeHit++;
-                }
-            }
-        }
-        
     }
 
     void TakeDamage(int enemyDamage)
