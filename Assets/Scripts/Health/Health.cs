@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     [SerializeField] GameObject deathMenu;
     public float currentHealth;
     
+    EnemyDamageDealer enemyDamageDealer;
     PlayerMovement playerMovement;
     HealthBar healthBar;
     bool isDead = false;
@@ -15,6 +16,7 @@ public class Health : MonoBehaviour
     {
         healthBar = FindFirstObjectByType<HealthBar>();
         playerMovement = FindFirstObjectByType<PlayerMovement>();
+        enemyDamageDealer = FindFirstObjectByType<EnemyDamageDealer>();
 
         if (deathMenu != null)
         {
@@ -30,10 +32,12 @@ public class Health : MonoBehaviour
     #region Damage
     private void OnTriggerEnter2D(Collider2D other)
     {
-         if (other.TryGetComponent(out EnemyDamageDealer enemyDamageDealer))
-         { 
+        enemyDamageDealer = other.GetComponent<EnemyDamageDealer>();
+
+        if (enemyDamageDealer != null)
+        { 
            TakeDamage(enemyDamageDealer.GetDamage());
-         } 
+        } 
     }
 
     void TakeDamage(int enemyDamage)
