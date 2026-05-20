@@ -104,5 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0718f135cc511242839dbffd4f71a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackWarning
-  duration: 0.6
+  duration: 2
   flashSpeed: 10
+  minAlpha: 0.2
+  maxAlpha: 0.7

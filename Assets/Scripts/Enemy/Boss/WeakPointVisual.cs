@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class WeakPointVisual : MonoBehaviour
 {
     [SerializeField] private Color inactiveColor = new(1, 1, 1, 0.2f);
@@ -9,38 +10,39 @@ public class WeakPointVisual : MonoBehaviour
     [SerializeField] private float pulseSpeed = 5f;
     [SerializeField] private float pulseSize = 0.15f;
 
-    Vector3 baseScale;
+    private SpriteRenderer spriteRenderer;
+    private Vector3 baseScale;
 
-    bool active;
-
-    SpriteRenderer spriteRenderer;
+    private bool active;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-
         baseScale = transform.localScale;
+
+        spriteRenderer.color = inactiveColor;
     }
 
-    void Update()
+    private void Update()
     {
-        if (active)
-        {
-            float pulse = 1 + Mathf.Sin(Time.time * pulseSpeed) * pulseSpeed;
+        if (!active)
+            return;
 
-            transform.localPosition = baseScale * pulse;
+        float pulse = 1f + Mathf.Sin(Time.time * pulseSpeed) * pulseSize;
 
-            spriteRenderer.color = Color.Lerp(inactiveColor, activeColor, Mathf.PingPong(Time.time * pulseSpeed, 1));
-        }
-        else
-        {
-            transform.localPosition = baseScale;
-            spriteRenderer.color = inactiveColor;
-        }
+        transform.localScale = baseScale * pulse;
+
+        spriteRenderer.color = Color.Lerp(inactiveColor, activeColor, Mathf.PingPong(Time.time * pulseSpeed, 1f));
     }
 
     public void SetActive(bool state)
     {
         active = state;
+
+        if (!active)
+        {
+            transform.localScale = baseScale;
+            spriteRenderer.color = inactiveColor;
+        }
     }
 }

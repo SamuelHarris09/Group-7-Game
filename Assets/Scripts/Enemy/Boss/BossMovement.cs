@@ -130,7 +130,7 @@ public class BossMovement : MonoBehaviour
             Vector2 leftPos = center + Vector2.left * sweepDistance;
             Vector2 rightPos = center + Vector2.right * sweepDistance;
 
-            Vector2 warningPos = new Vector2(center.x, center.y);
+            Vector2 warningPos = new(center.x, center.y);
 
             yield return StartCoroutine(ShowAttackWarning(warningPos, sweepWarningSize));
 

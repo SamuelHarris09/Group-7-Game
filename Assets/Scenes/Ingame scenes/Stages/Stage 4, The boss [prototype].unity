@@ -5254,7 +5254,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -31, y: 7.2, z: 0}
-  m_LocalScale: {x: 2, y: 6, z: 1}
+  m_LocalScale: {x: 2, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2140849446587698710}
@@ -5479,13 +5479,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0912639da971781468ec71f930e26c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossMovement
-  moveSpeed1: 19
-  moveSpeed2: 18
-  moveSpeed3: 15
+  moveSpeed1: 25
+  moveSpeed2: 25
+  moveSpeed3: 25
   hitWindow1: 8
   hitWindow2: 8
   hitWindow3: 8
-  attackWarningPrefab: {fileID: 0}
+  attackWarningPrefab: {fileID: 1732491741004330207, guid: f532ebcc6e45c8e48a45978306002a95, type: 3}
   warningDuration: 0.6
   sweepWarningSize: {x: 20, y: 2}
   slamWarningSize: {x: 2, y: 8}
@@ -5496,7 +5496,7 @@ MonoBehaviour:
   bossDamage:
   - {fileID: -2648766191370339780, guid: ed594153b7bd84f489d1ddf52e3a51c9, type: 3}
   - {fileID: -9141020482542215647, guid: 865fbb844f0db894186c5d6f3b617622, type: 3}
-  weakPointVisual: {fileID: 0}
+  weakPointVisual: {fileID: 2022215022}
   handWave1: {fileID: 1116932476576175832}
   armLine: {fileID: 5908249955270600615}
   Wave1Platforms: {fileID: 380642421}
