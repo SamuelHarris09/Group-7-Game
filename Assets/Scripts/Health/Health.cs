@@ -6,15 +6,18 @@ public class Health : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] GameObject deathMenu;
     public float currentHealth;
-    
+    private float bossTakeHit;
+
     EnemyDamageDealer enemyDamageDealer;
     PlayerMovement playerMovement;
+    BossMovement bossMovement;
     HealthBar healthBar;
     bool isDead = false;
 
     private void Start()
     {
         healthBar = FindFirstObjectByType<HealthBar>();
+        bossMovement = FindFirstObjectByType<BossMovement>();
         playerMovement = FindFirstObjectByType<PlayerMovement>();
         enemyDamageDealer = FindFirstObjectByType<EnemyDamageDealer>();
 
@@ -38,6 +41,19 @@ public class Health : MonoBehaviour
         { 
            TakeDamage(enemyDamageDealer.GetDamage());
         } 
+
+        if (other.CompareTag("BossHand"))
+        {
+            if (bossTakeHit > 4f)
+            {
+                Die();
+                bossMovement.StopAllCoroutines();
+            }
+            else if (bossTakeHit < 4f)
+            {
+                bossTakeHit++;
+            }
+        }
     }
 
     void TakeDamage(int enemyDamage)
@@ -57,6 +73,8 @@ public class Health : MonoBehaviour
         if (isDead) return;
 
         isDead = true;
+
+        Time.timeScale = 0f;
 
         playerMovement.Death();
         spriteRenderer.enabled = false;
