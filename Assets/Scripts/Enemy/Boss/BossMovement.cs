@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class BossMovement : MonoBehaviour
 {
+    #region SerializeField
     [Header("Movement")]
     [SerializeField] float moveSpeed1 = 20f;
     [SerializeField] float moveSpeed2 = 20f;
@@ -12,10 +13,12 @@ public class BossMovement : MonoBehaviour
     [SerializeField] float hitWindow2 = 5f;
     [SerializeField] float hitWindow3 = 5f;
 
-    [Header("Telegraph")]
-    [SerializeField] private GameObject telegraphPrefab;
-    [SerializeField] private float telegraphDuration = 0.6f;
-    [SerializeField] private Vector2 telegraphScale = new Vector2(3f, 0.5f);
+    [Header("Attack Warnings")]
+    [SerializeField] private GameObject attackWarningPrefab;
+    [SerializeField] private float warningDuration = 0.6f;
+
+    [SerializeField] private Vector2 sweepWarningSize = new(20f, 2f);
+    [SerializeField] private Vector2 slamWarningSize = new(2f, 8f);
 
     [Header("Screen Shake")]
     [SerializeField] private Transform cameraTransform;
@@ -25,6 +28,9 @@ public class BossMovement : MonoBehaviour
     [Header("Boss defeated")]
     [SerializeField] private GameObject finnishMenu;
     [SerializeField] private Sprite[] bossDamage;
+
+    [Header("Weak Point")]
+    [SerializeField] private WeakPointVisual weakPointVisual;
 
     [Header("Wave 1")]
     [SerializeField] private GameObject handWave1;
@@ -60,15 +66,18 @@ public class BossMovement : MonoBehaviour
     [SerializeField] private BossState currentState = BossState.Wave1;
     [SerializeField] private float startDelay = 3f;
     
-    SpriteRenderer bossBody;
-
+    SpriteRenderer visuals;
+    CircleCollider2D bossCollider;
+    #endregion
+    #region Start
     private void Start()
     {
         StartCoroutine(BossLoop());
         Wave1Platforms.SetActive(true);
         Wave2Platforms.SetActive(false);
 
-        bossBody = GetComponent<SpriteRenderer>();
+        visuals = transform.Find("Visuals").GetComponent<SpriteRenderer>();
+        bossCollider = GetComponentInChildren<CircleCollider2D>();
     }
 
     public enum BossState
@@ -100,7 +109,7 @@ public class BossMovement : MonoBehaviour
             yield return null;
         }
     }
-
+    #endregion
     #region Wave 1
     IEnumerator Wave1()
     {
@@ -121,13 +130,20 @@ public class BossMovement : MonoBehaviour
             Vector2 leftPos = center + Vector2.left * sweepDistance;
             Vector2 rightPos = center + Vector2.right * sweepDistance;
 
+            Vector2 warningPos = new Vector2(center.x, center.y);
+
+            yield return StartCoroutine(ShowAttackWarning(warningPos, sweepWarningSize));
+
             yield return StartCoroutine(MoveToPosition(handWave1.transform, leftPos));
             yield return StartCoroutine(MoveToPosition(handWave1.transform, rightPos));
+
+            StartCoroutine(ScreenShake(shakeDuration, shakeMagnitude));
 
             yield return new WaitForSeconds(stopDuration);
         }
 
         damageWindowActive = true;
+        weakPointVisual.SetActive(true);
         float timer = 0f;
 
         while (timer < hitWindow1)
@@ -147,6 +163,7 @@ public class BossMovement : MonoBehaviour
         }
 
         damageWindowActive = false;
+        weakPointVisual.SetActive(false);
         currentState = BossState.Wave1;
     }
 
@@ -176,7 +193,7 @@ public class BossMovement : MonoBehaviour
     #region Wave 2
     IEnumerator Wave2()
     {
-        bossBody.sprite = bossDamage[0];
+        visuals.sprite = bossDamage[0];
         SetWave1PlatformActive(false);
         SetWave2PlatformActive(true);
 
@@ -188,18 +205,30 @@ public class BossMovement : MonoBehaviour
         {
             for (int i = 0; i < wave2Repetitions; i++)
             {
+                yield return StartCoroutine(ShowAttackWarning(leftPositions[1].position, slamWarningSize));
+
+                yield return StartCoroutine(ShowAttackWarning(rightPositions[1].position, slamWarningSize));
+
                 yield return StartCoroutine(MoveHands(leftPositions[1].position, rightPositions[1].position));
                 yield return new WaitForSeconds(wave2WaitTime);
 
+                yield return StartCoroutine(ShowAttackWarning(leftPositions[2].position, slamWarningSize));
+
+                yield return StartCoroutine(ShowAttackWarning(rightPositions[2].position, slamWarningSize));
+
                 yield return StartCoroutine(MoveHands(leftPositions[2].position, rightPositions[2].position));
                 yield return new WaitForSeconds(wave2RepetTime);
+
+                yield return StartCoroutine(ShowAttackWarning(leftPositions[3].position, slamWarningSize));
+
+                yield return StartCoroutine(ShowAttackWarning(rightPositions[3].position, slamWarningSize));
 
                 yield return StartCoroutine(MoveHands(leftPositions[3].position, rightPositions[3].position));
                 yield return new WaitForSeconds(wave2WaitTime);
             }
 
             damageWindowActive = true;
-
+            weakPointVisual.SetActive(true);
             float timer = 0f;
 
             while (timer < hitWindow2)
@@ -216,6 +245,8 @@ public class BossMovement : MonoBehaviour
             }
 
             damageWindowActive = false;
+            weakPointVisual.SetActive(false);
+            currentState = BossState.Wave2;
         }
     }
 
@@ -243,7 +274,7 @@ public class BossMovement : MonoBehaviour
     #region Wave 3
     IEnumerator Wave3()
     {
-        bossBody.sprite = bossDamage[1];
+        visuals.sprite = bossDamage[1];
         SetWave1PlatformActive(false);
         SetWave2PlatformActive(true);
 
@@ -266,6 +297,7 @@ public class BossMovement : MonoBehaviour
         }
 
         damageWindowActive = true;
+        weakPointVisual.SetActive(true);
         float timer = 0f;
 
         while (timer < hitWindow3)
@@ -299,13 +331,12 @@ public class BossMovement : MonoBehaviour
         }
 
         damageWindowActive = false;
+        weakPointVisual.SetActive(false);
         currentState = BossState.Wave3;
     }
 
     IEnumerator HandSweep(Vector2 from, Vector2 to)
     {
-        //yield return StartCoroutine(ShowTelegraph(from));
-
         handWave3.transform.position = from;
 
         yield return StartCoroutine(MoveToPosition(handWave3.transform, to));
@@ -326,9 +357,13 @@ public class BossMovement : MonoBehaviour
 
     IEnumerator OffsetSlams()
     {
+        yield return StartCoroutine(ShowAttackWarning(leftPositions[1].position, slamWarningSize));
+
         Coroutine left = StartCoroutine(MoveSingleHand(leftHand, leftPositions[1].position));
 
         yield return new WaitForSeconds(wave3Delay);
+
+        yield return StartCoroutine(ShowAttackWarning(rightPositions[1].position, slamWarningSize));
 
         Coroutine right = StartCoroutine(MoveSingleHand(rightHand, rightPositions[1].position));
 
@@ -339,9 +374,13 @@ public class BossMovement : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
+        yield return StartCoroutine(ShowAttackWarning(leftPositions[2].position, slamWarningSize));
+
         left = StartCoroutine(MoveSingleHand(leftHand, leftPositions[2].position));
 
         yield return new WaitForSeconds(wave3Delay);
+
+        yield return StartCoroutine(ShowAttackWarning(rightPositions[2].position, slamWarningSize));
 
         right = StartCoroutine(MoveSingleHand(rightHand, rightPositions[2].position));
 
@@ -352,19 +391,6 @@ public class BossMovement : MonoBehaviour
     }
     #endregion
     #region Visual Affects
-    IEnumerator ShowTelegraph(Vector2 position)
-    {
-        if (telegraphPrefab == null)
-            yield break;
-
-        GameObject tele = Instantiate(telegraphPrefab, position, Quaternion.identity);
-        tele.transform.localScale = telegraphScale;
-
-        yield return new WaitForSeconds(telegraphDuration);
-
-        Destroy(tele);
-    }
-
     IEnumerator ScreenShake(float duration, float magnitude)
     {
         if (cameraTransform == null)
@@ -387,8 +413,20 @@ public class BossMovement : MonoBehaviour
 
         cameraTransform.localPosition = originalPos;
     }
+    IEnumerator ShowAttackWarning(Vector2 position, Vector2 size)
+    {
+        if (attackWarningPrefab == null)
+            yield break;
+
+        GameObject warning = Instantiate(attackWarningPrefab, position, Quaternion.identity);
+
+        warning.transform.localScale = size;
+
+        yield return new WaitForSeconds(warningDuration);
+    }
+
     #endregion
-    #region Remove this before making a build!
+    #region Change current Wave
 
     private void Update()
     {
@@ -409,7 +447,7 @@ public class BossMovement : MonoBehaviour
         StartCoroutine(BossLoop());
     }
     #endregion
-
+    #region Help Stuff
     void SetHandActive(bool active)
     {
         handWave1.SetActive(active);
@@ -427,7 +465,7 @@ public class BossMovement : MonoBehaviour
     {
         Wave2Platforms.SetActive(active);
     }
-
+    #endregion
     private void OnTriggerEnter2D(Collider2D other)
     {
         int layerIndexC = LayerMask.NameToLayer("HitBox");
@@ -449,7 +487,7 @@ public class BossMovement : MonoBehaviour
     private void BossDefeated()
     {
         Time.timeScale = 0;
-        bossBody.enabled = false;
+        visuals.enabled = false;
         finnishMenu.SetActive(true);
     }
 }
