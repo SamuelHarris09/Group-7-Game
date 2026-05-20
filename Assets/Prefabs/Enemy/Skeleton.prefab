@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e987e1be303000d4da22f183a480357a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkeletonAI
-  player: {fileID: 0}
+  player: {fileID: 662373743610568515}
   moveSpeed: 1
   agroRange: 5
   runRange: 2.5
@@ -251,6 +251,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   currentHealth: 10
-  isGummba: 0
-  isSkeleton: 1
-  isBat: 0

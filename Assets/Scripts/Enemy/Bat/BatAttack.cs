@@ -11,7 +11,6 @@ public class BatAtatck : MonoBehaviour
     [SerializeField] Transform[] attackWayPoints;
 
     [SerializeField] float attackSpeed = 5f;
-    [SerializeField] float iGAYRange = 5f;
     [SerializeField] public bool canAttack = true;
     int attackPointIndex = 0;
 
@@ -29,12 +28,10 @@ public class BatAtatck : MonoBehaviour
 
     void batAttackCheck()
     {
-        float distToPlayer = Vector2.Distance(transform.position, player.position);
-
-            if (distToPlayer < iGAYRange && distToPlayer > iGAYRange - iGAYRange)
-            {
-                StartCoroutine(attackPlayer());
-            }
+        if(canAttack == true)
+        {
+            StartCoroutine(attackPlayer());
+        }
     }
 
     IEnumerator attackPlayer()
@@ -55,6 +52,7 @@ public class BatAtatck : MonoBehaviour
             if (attackPointIndex == attackWayPoints.Length)
             {
                 attackPointIndex = 0;
+                yield return new WaitForSeconds(1);
             }
         }
         canAttack = true;

@@ -12,7 +12,7 @@ public class HealthPowerUp : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerHealth.currentHealth = playerHealth.currentHealth + powerupValue;
-            Destroy(gameManager.powerup);
+            //Destroy(gameManager.powerup);
         }
     }
 }

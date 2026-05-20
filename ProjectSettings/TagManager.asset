@@ -8,12 +8,14 @@ TagManager:
   - Spear
   - Key
   - Door
-  - Gambling Machine
   - PlacedSpear
   - TimeText
   - Ground
   - Boundery
-  - CameraBounds
+  - KeyIcon
+  - Gambling Machine
+  - PauseMenu
+  - DeathMenu
   layers:
   - Default
   - TransparentFX

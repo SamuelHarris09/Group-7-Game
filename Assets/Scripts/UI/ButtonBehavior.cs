@@ -3,12 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class ButtonBehavior : MonoBehaviour
 {
-    bool isOn;
+    Health health;
 
     private void Start()
     {
-        gamblingMachine = FindFirstObjectByType<GamblingMachine>();
-        isOn = false;
+        health = FindFirstObjectByType<Health>();
     }
 
     #region UI Buttons
@@ -54,44 +53,6 @@ public class ButtonBehavior : MonoBehaviour
     public void PausGame(bool staus)
     {
         ControlsMenu.SetActive(staus);
-    }
-    #endregion
-    #region Gambling Machine
-    [SerializeField] private GameObject gamblingMachineMenu;
-
-    GamblingMachine gamblingMachine;
-
-    public void GamblingMachineMenuOn()
-    {
-        GamblingMachineMenu(true);
-    }
-
-    public void GamblingMachineMenuOff()
-    {
-        GamblingMachineMenu(false);
-    }
-
-    public void GamblingMachineMenu(bool status)
-    {
-        gamblingMachineMenu.SetActive(status);
-
-        if (status)
-        {
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
-    }
-
-    public void GamblingMachineOn()
-    {
-        if (isOn == false)
-        {
-            StartCoroutine(gamblingMachine.SpinRoutine());
-            isOn = true;
-        }
     }
     #endregion
 }

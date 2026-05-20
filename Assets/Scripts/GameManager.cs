@@ -1,42 +1,34 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using static DifficultyManager;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
-    [Header("UI")]
-    [SerializeField] TextMeshProUGUI timeText;
-    [SerializeField] private GameObject key;
-    [SerializeField] public GameObject gamblingMachine;
+    
+    TextMeshProUGUI timeText;
+    private GameObject key;
+    private GameObject keyIcon;
+    private GameObject pauseScreen;
 
     [Header("Pause")]
-    [SerializeField] private GameObject pauseScreen;
-    [SerializeField] public GameObject powerup;
-    [SerializeField] public Sprite[] changeDoor;  
-    [SerializeField] private float gainHealthBack = 1.5f;
-    [HideInInspector] public float healthUpdate;
+    [SerializeField] public Sprite[] changeDoor;
     [SerializeField] private float gamePlayLevelCount = 5;
 
     private float timeElapsed = 0f;
     public int enemiesAlive;
     bool keySpawned = false;
+    public bool keyIconOn = false;
 
     public SpriteRenderer door;
 
-    DifficultyManager difficultyManager;
     Health playerHealth;
 
     InputAction pauseMenu;
 
     private void Awake()
     {
-        pauseScreen.SetActive(false);
-
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -52,18 +44,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         playerHealth = FindFirstObjectByType<Health>();
-        difficultyManager = FindFirstObjectByType<DifficultyManager>();
         pauseMenu = InputSystem.actions.FindAction("Pause Menu");
-
-        gamblingMachine.SetActive(false);
-
-        if (difficultyManager.currentDifficulty == Difficulty.Hard)
-        {
-            HealthPowerup();
-        }
-
-        //this below is temprary until i figure out how to get the currect difficulty from the "PlayerPrefs.GetInt("Difficulty", index)"
-        PlayerPrefs.GetInt("Difficulty");
     }
     
     void Update()
@@ -75,23 +56,32 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (timeText != null)
-        {
-            return;
-        }
-        timeText = GameObject.FindWithTag("TimeText").GetComponent<TextMeshProUGUI>();
+        timeText = GameObject.FindWithTag("TimeText")?.GetComponent<TextMeshProUGUI>();
+        keyIcon = GameObject.FindWithTag("KeyIcon");
+        key = GameObject.FindWithTag("Key");
+        pauseScreen = GameObject.FindWithTag("PauseMenu");
+        door = GameObject.FindWithTag("Door")?.GetComponent<SpriteRenderer>();
 
         playerHealth = FindFirstObjectByType<Health>();
-        difficultyManager = FindFirstObjectByType<DifficultyManager>();
 
         keySpawned = false;
+        keyIconOn = false;
+
+        if (pauseScreen != null)
+        {
+            pauseScreen.SetActive(false);
+        }
 
         if (scene.buildIndex < gamePlayLevelCount)
         {
-            key.SetActive(false);
-            powerup.SetActive(false);
-            door.sprite = changeDoor[0];
-            gamblingMachine.SetActive(true);
+            if (keyIcon != null)
+                keyIcon.SetActive(false);
+
+            if (key != null)
+                key.SetActive(false);
+
+            if (door != null && changeDoor.Length > 0)
+                door.sprite = changeDoor[0];
         }
     }
 
@@ -143,54 +133,30 @@ public class GameManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().buildIndex < gamePlayLevelCount)
         {
-            if (!keySpawned && enemiesAlive <= 0)
+            if (!keySpawned && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0)
             {
                 keySpawned = true;
-                key.SetActive(true);
-                door.sprite = changeDoor[1];
-                gamblingMachine.SetActive(true);
+
+                if (key != null)
+                    key.SetActive(true);
+
+                if (door != null && changeDoor.Length > 1)
+                    door.sprite = changeDoor[1];
+
+                if (keyIconOn == true)
+                {
+                    if (keyIcon != null)
+                        keyIcon.SetActive(false);
+                }
             }
         }
     }
-    #endregion
-    #region Save Player Health
-    void NextLevelHealth()
+    public void HasKey()
     {
-        if (difficultyManager.currentDifficulty == Difficulty.Easy)
-        {
-            healthUpdate = playerHealth.maxHealth;
-        }
-
-        if (difficultyManager.currentDifficulty == Difficulty.Normal)
-        {
-            healthUpdate = Mathf.Min(playerHealth.currentHealth * gainHealthBack, healthUpdate);
-        }
-
-        if (difficultyManager.currentDifficulty == Difficulty.Hard)
-        {
-            healthUpdate = playerHealth.currentHealth;
-        }
-    }
-
-    public void ApplyNewHealth()
-    {
-        StartCoroutine(ChangeHealth());
-    }
-
-    IEnumerator ChangeHealth()
-    {
-        healthUpdate = playerHealth.currentHealth;
-        NextLevelHealth();
-
-        yield return new WaitForSecondsRealtime(2.5f);
-        playerHealth.SetHealth();
-    }
-    #endregion
-    #region Health Powerup
-    void HealthPowerup()
-    {
-        powerup.SetActive(true);
-        Debug.Log("True");
+        if (keyIcon != null)
+            keyIcon.SetActive(true);
+        if (key != null)
+            key.SetActive(false);
     }
     #endregion
 }

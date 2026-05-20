@@ -4,15 +4,23 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] GameObject[] hearts;
     [SerializeField] GameObject[] background;
-    [SerializeField] float PlayerHealth = 1f;
+    private float playerHealthUI = 100f;
 
-    public Health playerHealth;
+    Health playerHealth;
+    
+    private void Start()
+    {
+        playerHealth = GetComponent<Health>();
+    }
 
     public void UpdateHealthUI()
     {
+        if (playerHealth == null)
+            return;
+
         float health = playerHealth.currentHealth;
 
-        float healthPerHearth = PlayerHealth / hearts.Length;
+        float healthPerHearth = playerHealthUI / hearts.Length;
         int heartsToShow = Mathf.CeilToInt(health / healthPerHearth);
 
         for (int i = 0; i < hearts.Length; i++)

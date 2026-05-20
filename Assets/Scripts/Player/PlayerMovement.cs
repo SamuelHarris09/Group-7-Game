@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
     private bool canDash = true;
     private bool isDashing;
 
+    [SerializeField] CameraController cameraController;
+
     bool canControlPlayer = true;
 
     Vector2 moveVector;
@@ -47,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         dashAction = InputSystem.actions.FindAction("Dash");
 
         rb = GetComponent<Rigidbody2D>();
+        cameraController = GetComponent<CameraController>();
         currentSpeed = moveSpeed;
     }
 
@@ -187,8 +190,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     #endregion
+
     public void Death()
     {
         canControlPlayer = false;
+    }
+
+    public void Alive()
+    {
+        canControlPlayer = true;
     }
 }

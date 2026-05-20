@@ -55,5 +55,15 @@ public class SkeletonAI : MonoBehaviour
     //how was the fall?
     //if you want to look around.
     //give us a call.
-    //
+    //we dont see humans often.
+    //we're happy you just dropped in.
+    //i'll be so popular when i show all the monsters what i just brought in!
+    //hey, papyrus. mind your manners!
+    //damn it sans, no time for banters!
+    //excuse my brother he's a bit excentric.
+    //you're just lazy and apathetic!
+    //call me what you want, i got thick skin!
+    //another bad joke and im finished with him!
+    //we are monsters, the awfullest kind!
+    //to mess with us takes a lot of spine.
 }

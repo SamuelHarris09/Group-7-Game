@@ -2,65 +2,85 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] public float currentHealth = 10f;
-    [SerializeField] public float maxHealth = 10f;
+    [SerializeField] public float maxHealth = 100f;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] GameObject deathMenu;
-
-    public int health = 10;
+    public float currentHealth;
+    private float bossTakeHit;
 
     EnemyDamageDealer enemyDamageDealer;
     PlayerMovement playerMovement;
-    PlayerAttack playerAttack;
+    BossMovement bossMovement;
+    HealthBar healthBar;
+    bool isDead = false;
 
     private void Start()
     {
+        healthBar = FindFirstObjectByType<HealthBar>();
+        bossMovement = FindFirstObjectByType<BossMovement>();
         playerMovement = FindFirstObjectByType<PlayerMovement>();
-        playerAttack = FindFirstObjectByType<PlayerAttack>();
         enemyDamageDealer = FindFirstObjectByType<EnemyDamageDealer>();
 
-        deathMenu.SetActive(false);
+        if (deathMenu != null)
+        {
+            deathMenu.SetActive(false);
+        }
+
+        spriteRenderer.enabled = true;
 
         currentHealth = maxHealth;
+
+        Debug.Log(currentHealth);
     }
     #region Damage
     private void OnTriggerEnter2D(Collider2D other)
     {
-         enemyDamageDealer = other.GetComponent<EnemyDamageDealer>();
+        enemyDamageDealer = other.GetComponent<EnemyDamageDealer>();
 
-         if (enemyDamageDealer != null)
-         { 
+        if (enemyDamageDealer != null)
+        { 
            TakeDamage(enemyDamageDealer.GetDamage());
-         } 
-    }
+        } 
 
-    public void Die()
-    {
-        if (currentHealth <= 0)
+        if (other.CompareTag("BossHand"))
         {
-            playerMovement.Death();
-            playerAttack.SpearAttack();
-            GameObject.Find("Player").GetComponent<SpriteRenderer>().enabled = false;
-            deathMenu.SetActive(true);
+            if (bossTakeHit > 4f)
+            {
+                Die();
+                bossMovement.StopAllCoroutines();
+            }
+            else if (bossTakeHit < 4f)
+            {
+                bossTakeHit++;
+            }
         }
     }
 
-    void TakeDamage(int damage)
+    void TakeDamage(int enemyDamage)
     {
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        currentHealth -= enemyDamage;
 
-        FindFirstObjectByType<HealthBar>().UpdateHealthUI();
+        healthBar.UpdateHealthUI();
 
         if (currentHealth <= 0)
         {
             Die();
         }
     }
-    #endregion
 
-    public void SetHealth()
+    public void Die()
     {
-        currentHealth = GameManager.instance.healthUpdate;
+        if (isDead) return;
+
+        isDead = true;
+
+        Time.timeScale = 0f;
+
+        playerMovement.Death();
+        spriteRenderer.enabled = false;
+
+        if (deathMenu != null)
+            deathMenu.SetActive(true);
     }
+    #endregion
 }

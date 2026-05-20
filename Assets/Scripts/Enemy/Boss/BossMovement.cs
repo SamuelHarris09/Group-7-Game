@@ -24,7 +24,7 @@ public class BossMovement : MonoBehaviour
 
     [Header("Boss defeated")]
     [SerializeField] private GameObject finnishMenu;
-    [SerializeField] private GameObject head;
+    [SerializeField] private Sprite[] bossDamage;
 
     [Header("Wave 1")]
     [SerializeField] private GameObject handWave1;
@@ -58,8 +58,9 @@ public class BossMovement : MonoBehaviour
     private bool damageWindowActive = false;
     private bool wasHitThisCycle = false;
     [SerializeField] private BossState currentState = BossState.Wave1;
+    [SerializeField] private float startDelay = 3f;
     
-    SpriteRenderer body;
+    SpriteRenderer bossBody;
 
     private void Start()
     {
@@ -67,7 +68,7 @@ public class BossMovement : MonoBehaviour
         Wave1Platforms.SetActive(true);
         Wave2Platforms.SetActive(false);
 
-        body = GetComponent<SpriteRenderer>();
+        bossBody = GetComponent<SpriteRenderer>();
     }
 
     public enum BossState
@@ -103,6 +104,7 @@ public class BossMovement : MonoBehaviour
     #region Wave 1
     IEnumerator Wave1()
     {
+        yield return new WaitForSeconds(startDelay);
         SetWave1PlatformActive(true);
         SetWave2PlatformActive(false);
 
@@ -174,6 +176,7 @@ public class BossMovement : MonoBehaviour
     #region Wave 2
     IEnumerator Wave2()
     {
+        bossBody.sprite = bossDamage[0];
         SetWave1PlatformActive(false);
         SetWave2PlatformActive(true);
 
@@ -240,6 +243,7 @@ public class BossMovement : MonoBehaviour
     #region Wave 3
     IEnumerator Wave3()
     {
+        bossBody.sprite = bossDamage[1];
         SetWave1PlatformActive(false);
         SetWave2PlatformActive(true);
 
@@ -385,6 +389,7 @@ public class BossMovement : MonoBehaviour
     }
     #endregion
     #region Remove this before making a build!
+
     private void Update()
     {
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
@@ -423,6 +428,16 @@ public class BossMovement : MonoBehaviour
         Wave2Platforms.SetActive(active);
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        int layerIndexC = LayerMask.NameToLayer("HitBox");
+
+        if (other.gameObject.layer == layerIndexC)
+        {
+            TakeHit();
+        }
+    }
+
     public void TakeHit()
     {
         if (!damageWindowActive)
@@ -434,8 +449,7 @@ public class BossMovement : MonoBehaviour
     private void BossDefeated()
     {
         Time.timeScale = 0;
-        head.SetActive(false);
-        body.enabled = false;
+        bossBody.enabled = false;
         finnishMenu.SetActive(true);
     }
 }

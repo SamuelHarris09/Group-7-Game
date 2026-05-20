@@ -325,7 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 6
   crouchSpeed: 1
-  jumpHeight: 12.5
+  jumpHeight: 13
   jumpDistance: 2
   groundLayer:
     serializedVersion: 2
@@ -338,6 +338,10 @@ MonoBehaviour:
   dashingTime: 0.25
   dashingCooldown: 1.25
   trailRenderer: {fileID: 3227669317704760689}
+  leftBoundPadding: 0
+  rigthBoundPadding: 0
+  upBoundPadding: 0
+  downBoundPadding: 0
 --- !u!114 &6032365202887254488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,9 +372,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   spear: {fileID: 1736887500704558027}
   PlacedSpear: {fileID: 0}
-  spearDeActiveDelay: 1
+  spearDeActiveDelay: 0.33
   isActive: 0
-  hasSpear: 0
+  hasSpear: 1
   canAttack: 1
 --- !u!1 &1395276653438855483
 GameObject:
@@ -419,7 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpearLooker
   mainCam: {fileID: 0}
   mousePos: {x: 0, y: 0, z: 0}
-  spearAttackDelay: 1
+  spearAttackDelay: 0.33
 --- !u!1 &1736887500704558027
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4869809577179873881
 Transform:
   m_ObjectHideFlags: 0
@@ -618,10 +622,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   currentHealth: 10
-  maxHealth: 10
   spriteRenderer: {fileID: 4518652125115464846}
   deathMenu: {fileID: 0}
-  health: 10
 --- !u!61 &7659354677299631193
 BoxCollider2D:
   m_ObjectHideFlags: 0

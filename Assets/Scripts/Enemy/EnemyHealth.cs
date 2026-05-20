@@ -3,25 +3,6 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float currentHealth = 10f;
-    public bool isGummba;
-    public bool isSkeleton;
-    public bool isBat;
-
-    private void Start()
-    {
-        if (isGummba == true)
-        {
-            currentHealth = DifficultyManager.instance.gombaHealth;
-        }
-        if (isSkeleton == true)
-        {
-            currentHealth = DifficultyManager.instance.skeletonHealth;
-        }
-        if (isBat == true)
-        {
-            currentHealth = DifficultyManager.instance.batHealth;
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
