@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float gamePlayLevelCount = 5;
 
     private float timeElapsed = 0f;
-    public int enemiesAlive;
     bool keySpawned = false;
     public bool keyIconOn = false;
 
@@ -54,7 +53,7 @@ public class GameManager : MonoBehaviour
         NextLevel();
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         timeText = GameObject.FindWithTag("TimeText")?.GetComponent<TextMeshProUGUI>();
         keyIcon = GameObject.FindWithTag("KeyIcon");

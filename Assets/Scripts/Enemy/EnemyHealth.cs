@@ -26,8 +26,6 @@ public class EnemyHealth : MonoBehaviour
             Destroy(gameObject);
 
             Debug.Log("Dead");
-
-            GameManager.instance.enemiesAlive--;
         }
     }
 

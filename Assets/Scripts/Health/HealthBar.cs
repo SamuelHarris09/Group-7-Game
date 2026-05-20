@@ -34,8 +34,8 @@ public class HealthBar : MonoBehaviour
         for (int i = 0; i < hearts.Length; i++)
         {
             Debug.Log("Yippe it works");
-            hearts[i].SetActive(i < health);
-            background[i].SetActive(1 >= heartsToShow);
+            hearts[i].SetActive(i * healthPerHearth <= health);
+            background[i].SetActive(i >= heartsToShow);
         }
     }
 }
