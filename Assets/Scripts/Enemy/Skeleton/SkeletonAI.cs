@@ -17,7 +17,7 @@ public class SkeletonAI : MonoBehaviour
     {
         float distToPlayer = Vector2.Distance(transform.position, player.position);
 
-        if (distToPlayer < runRange)
+        if (distToPlayer < runRange) 
         {
             // Start running like a fucking coward, little baby, little fucking wah wah baby coward.
             Run();
