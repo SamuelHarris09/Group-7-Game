@@ -5074,10 +5074,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 4387905767843405854, guid: 89c37650ded8d6143a13c70331081941, type: 3}
-      propertyPath: isGummba
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7768167325689307666, guid: 89c37650ded8d6143a13c70331081941, type: 3}
       propertyPath: player
       value: 
@@ -5975,7 +5971,6 @@ MonoBehaviour:
   - {fileID: -4781373940957465942, guid: 3c4008670b93d394b907ab00df05ede1, type: 3}
   - {fileID: -4008155563193174751, guid: b9ed9b024c333634da0a9726df605652, type: 3}
   gamePlayLevelCount: 5
-  enemiesAlive: 3
   keyIconOn: 0
   door: {fileID: 985150382}
 --- !u!4 &7879397698234338822
