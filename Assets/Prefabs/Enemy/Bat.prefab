@@ -182,12 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BatAtatck
   player: {fileID: 0}
-  attackWayPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  attackWayPoints: []
   attackSpeed: 5
   canAttack: 0
 --- !u!114 &-655319915399578152
@@ -215,4 +210,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca6aa6587d2935478fb5faa45e6b67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageDealer
-  damage: 3
+  enemyDamage: 5

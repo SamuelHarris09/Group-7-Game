@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canDash = true;
     private bool isDashing;
 
-    [SerializeField] CameraController cameraController;
+    CameraController cameraController;
 
     bool canControlPlayer = true;
 

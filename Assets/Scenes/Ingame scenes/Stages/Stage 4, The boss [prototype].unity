@@ -247,7 +247,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3461832267085578675, guid: 50aaea5a46aa73f4c8bcd536d7d127ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -291,6 +291,11 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!4 &58805822 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4869809577179873881, guid: a64f8571b4c02324d8185383bdbabc15, type: 3}
+  m_PrefabInstance: {fileID: 1926931433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &125867103
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,8 +323,8 @@ Transform:
   m_GameObject: {fileID: 125867103}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -31.05, y: 8.25, z: 0}
-  m_LocalScale: {x: 2, y: 11, z: 1}
+  m_LocalPosition: {x: -31, y: 8.25, z: 0}
+  m_LocalScale: {x: 2, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2140849446587698710}
@@ -392,10 +397,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 125867103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fca6aa6587d2935478fb5faa45e6b67e, type: 3}
+  m_Script: {fileID: 11500000, guid: f07c6bdb0bfe7904fbe6259264303357, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageDealer
-  enemyDamage: 10
+  m_EditorClassIdentifier: Assembly-CSharp::BossDamage
+  damage: 10
 --- !u!1 &181267810
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,10 +845,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 379640709}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fca6aa6587d2935478fb5faa45e6b67e, type: 3}
+  m_Script: {fileID: 11500000, guid: f07c6bdb0bfe7904fbe6259264303357, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageDealer
-  enemyDamage: 10
+  m_EditorClassIdentifier: Assembly-CSharp::BossDamage
+  damage: 10
 --- !u!1 &380642421
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,6 +917,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1561026331}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &418109775 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8597052093088830545, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
+  m_PrefabInstance: {fileID: 8235591311211822208}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &513848879
 GameObject:
   m_ObjectHideFlags: 0
@@ -2083,10 +2093,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 753045975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fca6aa6587d2935478fb5faa45e6b67e, type: 3}
+  m_Script: {fileID: 11500000, guid: f07c6bdb0bfe7904fbe6259264303357, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageDealer
-  enemyDamage: 10
+  m_EditorClassIdentifier: Assembly-CSharp::BossDamage
+  damage: 10
 --- !u!1 &854108057
 GameObject:
   m_ObjectHideFlags: 0
@@ -4271,22 +4281,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 283651817252127084, guid: a64f8571b4c02324d8185383bdbabc15, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 760012303881788695, guid: a64f8571b4c02324d8185383bdbabc15, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 871496285287441359, guid: a64f8571b4c02324d8185383bdbabc15, type: 3}
-      propertyPath: moveSpeed
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2532321101631245850, guid: a64f8571b4c02324d8185383bdbabc15, type: 3}
       propertyPath: deathMenu
       value: 
       objectReference: {fileID: 2101910303}
-    - target: {fileID: 2628866230662143448, guid: a64f8571b4c02324d8185383bdbabc15, type: 3}
-      propertyPath: PlacedSpear
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4044943988259190465, guid: a64f8571b4c02324d8185383bdbabc15, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.4
@@ -4327,20 +4333,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6032365202887254488, guid: a64f8571b4c02324d8185383bdbabc15, type: 3}
-      propertyPath: keyIcon
-      value: 
-      objectReference: {fileID: 1935756584}
+    - target: {fileID: 5872242277024066847, guid: a64f8571b4c02324d8185383bdbabc15, type: 3}
+      propertyPath: spearAttackDelay
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a64f8571b4c02324d8185383bdbabc15, type: 3}
---- !u!1 &1935756584 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1557243325696012768, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
-  m_PrefabInstance: {fileID: 8235591311211822208}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1942073801
 GameObject:
   m_ObjectHideFlags: 0
@@ -4695,11 +4696,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2022215020}
   - component: {fileID: 2022215021}
-  - component: {fileID: 2022215022}
   - component: {fileID: 2022215023}
+  - component: {fileID: 2022215022}
   m_Layer: 0
   m_Name: Weak Point Indicator
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4766,7 +4767,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4790,8 +4791,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d581be59cf49841a91f5bfe5c7b43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeakPointVisual
-  inactiveColor: {r: 1, g: 1, b: 1, a: 0}
-  activeColor: {r: 1, g: 0, b: 0, a: 0.3137255}
+  inactiveColor: {r: 0, g: 0, b: 0, a: 0}
+  activeColor: {r: 1, g: 1, b: 0, a: 0.3137255}
   pulseSpeed: 5
   pulseSize: 0.15
 --- !u!58 &2022215023
@@ -5296,8 +5297,8 @@ Transform:
   m_GameObject: {fileID: 1116932476576175832}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -31, y: 7.2, z: 0}
-  m_LocalScale: {x: 2, y: 7, z: 1}
+  m_LocalPosition: {x: -30, y: 7.2, z: 0}
+  m_LocalScale: {x: 2, y: 6.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2140849446587698710}
@@ -5311,10 +5312,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1116932476576175832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fca6aa6587d2935478fb5faa45e6b67e, type: 3}
+  m_Script: {fileID: 11500000, guid: f07c6bdb0bfe7904fbe6259264303357, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageDealer
-  enemyDamage: 10
+  m_EditorClassIdentifier: Assembly-CSharp::BossDamage
+  damage: 10
 --- !u!4 &3400847017617887034
 Transform:
   m_ObjectHideFlags: 0
@@ -5543,8 +5544,9 @@ MonoBehaviour:
   hitWindow3: 8
   attackWarningPrefab: {fileID: 1732491741004330207, guid: f532ebcc6e45c8e48a45978306002a95, type: 3}
   warningDuration: 0.6
-  sweepWarningSize: {x: 20, y: 2}
-  slamWarningSize: {x: 2, y: 8}
+  sweepWarningSize: {x: 30, y: 4}
+  slamWarningStraight: {x: 8, y: 30}
+  slamWarningdiagonallyUpwards: {x: 1, y: 1}
   cameraTransform: {fileID: 1379006232}
   shakeDuration: 0.2
   shakeMagnitude: 0.3
@@ -5553,6 +5555,8 @@ MonoBehaviour:
   - {fileID: -2648766191370339780, guid: ed594153b7bd84f489d1ddf52e3a51c9, type: 3}
   - {fileID: -9141020482542215647, guid: 865fbb844f0db894186c5d6f3b617622, type: 3}
   weakPointVisual: {fileID: 2022215022}
+  weakPoint: {fileID: 2022215020}
+  hitRadius: 2
   handWave1: {fileID: 1116932476576175832}
   armLine: {fileID: 5908249955270600615}
   Wave1Platforms: {fileID: 380642421}
@@ -5589,6 +5593,7 @@ MonoBehaviour:
   fakeOutDelay: 1
   currentState: 0
   startDelay: 3
+  playerSpear: {fileID: 58805822}
 --- !u!114 &5908249955270600614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5966,37 +5971,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Death & Pause Menu + Time 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4499128391189608616, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4785249855422628589, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
-      propertyPath: m_Size.x
-      value: 2.52
-      objectReference: {fileID: 0}
-    - target: {fileID: 4785249855422628589, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
-      propertyPath: m_Size.y
-      value: 3.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 4785249855422628589, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
-      propertyPath: m_Sprite
+    - target: {fileID: 6805044338998437937, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
+      propertyPath: ControlsMenu
       value: 
-      objectReference: {fileID: -6136079375251732219, guid: b7df90beff949364caaff1c5a7260eee, type: 3}
-    - target: {fileID: 4785249855422628589, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7196283265299146887, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8597052093088830545, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 418109775}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 41898303086420713, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}

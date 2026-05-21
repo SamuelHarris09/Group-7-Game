@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -20,7 +19,7 @@ public class WeakPointVisual : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         baseScale = transform.localScale;
 
-        spriteRenderer.color = inactiveColor;
+        spriteRenderer.enabled = false;
     }
 
     private void Update()
@@ -39,10 +38,11 @@ public class WeakPointVisual : MonoBehaviour
     {
         active = state;
 
-        if (!active)
+        spriteRenderer.enabled = state;
+
+        if (!state)
         {
             transform.localScale = baseScale;
-            spriteRenderer.color = inactiveColor;
         }
     }
 }

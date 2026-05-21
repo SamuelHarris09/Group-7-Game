@@ -1,25 +1,21 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] public float maxHealth = 100f;
-    [SerializeField] private float bossStage = 5f;
+    [SerializeField] private int bossDamage = 10;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] GameObject deathMenu;
     public float currentHealth;
-    private float bossTakeHit;
 
     EnemyDamageDealer enemyDamageDealer;
     PlayerMovement playerMovement;
-    BossMovement bossMovement;
     HealthBar healthBar;
     bool isDead = false;
 
     private void Start()
     {
         healthBar = FindFirstObjectByType<HealthBar>();
-        bossMovement = FindFirstObjectByType<BossMovement>();
         playerMovement = FindFirstObjectByType<PlayerMovement>();
         enemyDamageDealer = FindFirstObjectByType<EnemyDamageDealer>();
 
@@ -37,13 +33,20 @@ public class Health : MonoBehaviour
     #region Damage
     private void OnTriggerEnter2D(Collider2D other)
     {
-        enemyDamageDealer = other.GetComponent<EnemyDamageDealer>();
+        BossDamage hand = other.GetComponent<BossDamage>();
+
+        if (hand != null)
+        {
+            TakeDamage(hand.damage);
+        }
+
+        EnemyDamageDealer enemyDamageDealer = other.GetComponent<EnemyDamageDealer>();
 
         if (enemyDamageDealer != null)
         { 
             TakeDamage(enemyDamageDealer.GetDamage());
             Debug.Log(currentHealth);
-        } 
+        }
     }
 
     void TakeDamage(int enemyDamage)

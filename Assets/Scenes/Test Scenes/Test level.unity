@@ -198,18 +198,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e2771fec6c9294a803084eb4ecd3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  timeText: {fileID: 1867330270}
-  key: {fileID: 1829440522}
-  gamblingMachine: {fileID: 516123741}
-  pauseScreen: {fileID: 1867330269}
-  powerup: {fileID: 1829440522}
   changeDoor:
   - {fileID: -4781373940957465942, guid: 3c4008670b93d394b907ab00df05ede1, type: 3}
   - {fileID: -4008155563193174751, guid: b9ed9b024c333634da0a9726df605652, type: 3}
-  gainHealthBack: 1.5
-  healthUpdate: 0
   gamePlayLevelCount: 5
-  enemiesAlive: 0
+  keyIconOn: 0
   door: {fileID: 5983992982320017740}
 --- !u!1001 &294766933
 PrefabInstance:
@@ -618,11 +611,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1023939381676028880, guid: 697e430d830233844963aeee13ca2a42, type: 3}
   m_PrefabInstance: {fileID: 516123739}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &516123741 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3154718118529563845, guid: 697e430d830233844963aeee13ca2a42, type: 3}
-  m_PrefabInstance: {fileID: 516123739}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &676554436 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4469265081703217106, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
@@ -771,58 +759,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1557243325696012768, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
   m_PrefabInstance: {fileID: 1867330268}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1334938111
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1334938113}
-  - component: {fileID: 1334938112}
-  m_Layer: 0
-  m_Name: Difffculty Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1334938112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1334938111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb39343ea31364d4aa97fdc6b89c3b5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DifficultyManager
-  dropdown: {fileID: 0}
-  currentDifficulty: 0
-  gombaHealth: 0
-  skeletonHealth: 0
-  batHealth: 0
-  gombaDamage: 0
-  skeletonDamage: 0
-  batDamage: 0
---- !u!4 &1334938113
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1334938111}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1664594406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,11 +1101,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1661827351313870593, guid: 34d7b04c6c3d3dd438b3fb9f15414f46, type: 3}
   m_PrefabInstance: {fileID: 1829440520}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1829440522 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8952987402231386328, guid: 34d7b04c6c3d3dd438b3fb9f15414f46, type: 3}
-  m_PrefabInstance: {fileID: 1829440520}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1867330268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1271,22 +1202,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
---- !u!1 &1867330269 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8597052093088830545, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
-  m_PrefabInstance: {fileID: 1867330268}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1867330270 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 161910283119149367, guid: 589247ea51bdde241b2b9d9159c4e585, type: 3}
-  m_PrefabInstance: {fileID: 1867330268}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!4 &2068494508 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4044943988259190465, guid: a64f8571b4c02324d8185383bdbabc15, type: 3}
@@ -1613,5 +1528,4 @@ SceneRoots:
   - {fileID: 294766933}
   - {fileID: 25881199}
   - {fileID: 194289160}
-  - {fileID: 1334938113}
   - {fileID: 427350426}

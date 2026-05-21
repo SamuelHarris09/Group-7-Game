@@ -25,6 +25,11 @@ public class ButtonBehavior : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadSceneAsync(currentSceneIndex);
+
+        if (currentSceneIndex == 5)
+        {
+            SceneManager.LoadSceneAsync(2);
+        }
     }
 
     public void StartMenu()

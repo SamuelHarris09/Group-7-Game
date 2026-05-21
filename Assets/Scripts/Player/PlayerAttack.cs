@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -8,20 +7,18 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] GameObject spear;
     [SerializeField] GameObject PlacedSpear;
-    [SerializeField] float spearDeActiveDelay = 1.0f;
+    [SerializeField] float spearActiveTime = 0.5f;
 
     [Header("Bools")]
-    public bool isActive = false;
     public bool hasSpear = false;
-    public bool canAttack = true;
-
+    bool canAttack = true;
 
     InputAction attackAction;
 
     public void Start()
     {
         attackAction = InputSystem.actions.FindAction("Attack");
-        spear.SetActive(isActive);
+        spear.SetActive(false);
     }
     private void Update()
     {
@@ -52,19 +49,22 @@ public class PlayerAttack : MonoBehaviour
 
     public void SpearAttack()
     {
-        if (attackAction.IsPressed() && hasSpear == true && isActive == false && canAttack == true)
+        if (attackAction.WasPressedThisFrame() && hasSpear && canAttack)
         {
-            StartCoroutine(DelayAction(spearDeActiveDelay));
-            canAttack = false;
-            spear.SetActive(!isActive);
-
+            StartCoroutine(AttackRoutine());
         }
     }
 
-    IEnumerator DelayAction(float spearDeActiveDelay)
-    { 
-        yield return new WaitForSeconds(spearDeActiveDelay);
-        spear.SetActive(isActive);
+    IEnumerator AttackRoutine()
+    {
+        canAttack = false;
+
+        spear.SetActive(true);
+
+        yield return new WaitForSeconds(spearActiveTime);
+
+        spear.SetActive(false);
+        
         canAttack = true;
     }
 }

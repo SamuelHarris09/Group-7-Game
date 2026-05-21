@@ -147,23 +147,34 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.3007865, y: -0.990386}
-      - {x: 0.48742604, y: -1.0624752}
+    - - {x: 0.19389434, y: -0.5368824}
+      - {x: 0.28364268, y: -1.0161018}
+      - {x: 0.42043027, y: -1.0342674}
+      - {x: 0.4802829, y: -1.1124783}
       - {x: 0.48689455, y: -1.2140702}
-      - {x: -0.42233166, y: -1.2132932}
-      - {x: -0.47287738, y: -0.8756038}
-      - {x: -0.5406785, y: -0.74054426}
+      - {x: 0.060528785, y: -1.2083045}
+      - {x: -0.030140936, y: -1.1830435}
+      - {x: -0.41854686, y: -1.1737071}
+      - {x: -0.39889517, y: -0.90690994}
+      - {x: -0.5105846, y: -0.81067944}
       - {x: -0.63497937, y: -0.2076596}
       - {x: -0.6070301, y: -0.05413556}
-      - {x: -0.41670424, y: 0.32451105}
-      - {x: -0.308433, y: 0.40060115}
-      - {x: -0.37417746, y: 0.4624275}
-      - {x: -0.36156648, y: 1.0764658}
-      - {x: -0.13494974, y: 1.1902248}
-      - {x: 0.36838955, y: 0.9947716}
+      - {x: -0.40248245, y: 0.30216265}
+      - {x: -0.27795774, y: 0.40263295}
+      - {x: -0.3619873, y: 0.46852243}
+      - {x: -0.36653104, y: 0.73911285}
+      - {x: -0.4211487, y: 0.81426907}
+      - {x: -0.43025288, y: 0.9465823}
+      - {x: -0.35343975, y: 1.0581806}
+      - {x: -0.16435549, y: 1.1657085}
+      - {x: -0.017112076, y: 1.1638128}
+      - {x: 0.1520952, y: 1.1022468}
+      - {x: 0.3551836, y: 0.9561138}
+      - {x: 0.43197277, y: 0.8379617}
+      - {x: 0.38870636, y: 0.5742127}
       - {x: 0.37524462, y: 0.14255595}
-      - {x: 0.30977196, y: 0.107718825}
-      - {x: 0.1847663, y: -0.34960485}
+      - {x: 0.27569813, y: 0.11794126}
+      - {x: 0.17476577, y: -0.28960156}
   m_UseDelaunayMesh: 1
 --- !u!50 &283651817252127084
 Rigidbody2D:
@@ -323,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024dbf8e25f5fd74288425299fc9bd4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 6
+  moveSpeed: 10
   crouchSpeed: 1
   jumpHeight: 13
   jumpDistance: 2
@@ -338,10 +349,7 @@ MonoBehaviour:
   dashingTime: 0.25
   dashingCooldown: 1.25
   trailRenderer: {fileID: 3227669317704760689}
-  leftBoundPadding: 0
-  rigthBoundPadding: 0
-  upBoundPadding: 0
-  downBoundPadding: 0
+  cameraController: {fileID: 0}
 --- !u!114 &6032365202887254488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,8 +362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 872bcebcc6f112f4e97c0e9d855c66c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KeyForDoor
-  KeyPickUpDelay: 0.1
-  keyIcon: {fileID: 0}
   nextLevelWaitTime: 1.5
   HasKey: 0
 --- !u!114 &2628866230662143448
@@ -586,7 +592,7 @@ GameObject:
   m_Component:
   - component: {fileID: 652158459577894694}
   - component: {fileID: 2532321101631245850}
-  - component: {fileID: 7659354677299631193}
+  - component: {fileID: 633997399528421233}
   m_Layer: 10
   m_Name: PlayerHealthKeeper
   m_TagString: Player
@@ -603,7 +609,7 @@ Transform:
   m_GameObject: {fileID: 3859533249762251500}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07, y: -0.07, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -621,11 +627,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30010dfdc8d6aa64aaaf4ee2ddb25a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  currentHealth: 10
+  maxHealth: 100
+  bossDamage: 10
   spriteRenderer: {fileID: 4518652125115464846}
   deathMenu: {fileID: 0}
---- !u!61 &7659354677299631193
-BoxCollider2D:
+  currentHealth: 10
+--- !u!60 &633997399528421233
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -658,18 +666,47 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.099312305, y: 0.010105133}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.45, y: 2.46}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.62775993, y: 2.1468678}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.19389434, y: -0.5368824}
+      - {x: 0.28364268, y: -1.0161018}
+      - {x: 0.42043027, y: -1.0342674}
+      - {x: 0.4802829, y: -1.1124783}
+      - {x: 0.48689455, y: -1.2140702}
+      - {x: 0.060528785, y: -1.2083045}
+      - {x: -0.030140936, y: -1.1830435}
+      - {x: -0.41854686, y: -1.1737071}
+      - {x: -0.39889517, y: -0.90690994}
+      - {x: -0.5105846, y: -0.81067944}
+      - {x: -0.63497937, y: -0.2076596}
+      - {x: -0.6070301, y: -0.05413556}
+      - {x: -0.40248245, y: 0.30216265}
+      - {x: -0.27795774, y: 0.40263295}
+      - {x: -0.3619873, y: 0.46852243}
+      - {x: -0.36653104, y: 0.73911285}
+      - {x: -0.4211487, y: 0.81426907}
+      - {x: -0.43025288, y: 0.9465823}
+      - {x: -0.35343975, y: 1.0581806}
+      - {x: -0.16435549, y: 1.1657085}
+      - {x: -0.017112076, y: 1.1638128}
+      - {x: 0.1520952, y: 1.1022468}
+      - {x: 0.3551836, y: 0.9561138}
+      - {x: 0.43197277, y: 0.8379617}
+      - {x: 0.38870636, y: 0.5742127}
+      - {x: 0.37524462, y: 0.14255595}
+      - {x: 0.27569813, y: 0.11794126}
+      - {x: 0.17476577, y: -0.28960156}
+  m_UseDelaunayMesh: 1
 --- !u!1 &5308510615412129281
 GameObject:
   m_ObjectHideFlags: 0
