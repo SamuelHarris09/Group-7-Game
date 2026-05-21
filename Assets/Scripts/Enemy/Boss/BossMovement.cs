@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -67,7 +66,7 @@ public class BossMovement : MonoBehaviour
     [SerializeField] private float wave3Delay = 0.3f;
     [SerializeField] private float fakeOutDelay = 1f;
 
-    [Header("Random")]
+    [Header("Anything")]
     private bool damageWindowActive = false;
     private bool wasHitThisCycle = false;
     [SerializeField] private BossState currentState = BossState.Wave1;

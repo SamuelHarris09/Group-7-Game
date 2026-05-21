@@ -3,13 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class ButtonBehavior : MonoBehaviour
 {
-    Health health;
-
-    private void Start()
-    {
-        health = FindFirstObjectByType<Health>();
-    }
-
     #region UI Buttons
     public void PlayGame()
     {
@@ -30,6 +23,8 @@ public class ButtonBehavior : MonoBehaviour
         {
             SceneManager.LoadSceneAsync(2);
         }
+
+        GameManager.instance.RestartGameState();
     }
 
     public void StartMenu()

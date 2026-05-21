@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] public float maxHealth = 100f;
-    [SerializeField] private int bossDamage = 10;
+    public float maxHealth = 100f;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] GameObject deathMenu;
     public float currentHealth;

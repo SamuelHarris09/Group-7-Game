@@ -6,24 +6,19 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    
-    TextMeshProUGUI timeText;
-    private GameObject key;
-    private GameObject keyIcon;
-    private GameObject pauseScreen;
 
     [Header("Pause")]
     [SerializeField] public Sprite[] changeDoor;
     [SerializeField] private float gamePlayLevelCount = 5;
+    private GameObject key;
 
     private float timeElapsed = 0f;
-    bool keySpawned = false;
+    private bool keySpawned = false;
     public bool keyIconOn = false;
 
     public SpriteRenderer door;
 
     Health playerHealth;
-
     InputAction pauseMenu;
 
     private void Awake()
@@ -42,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        playerHealth = FindFirstObjectByType<Health>();
+        key = GameObject.FindWithTag("Key");
         pauseMenu = InputSystem.actions.FindAction("Pause Menu");
     }
     
@@ -55,10 +50,9 @@ public class GameManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        timeText = GameObject.FindWithTag("TimeText")?.GetComponent<TextMeshProUGUI>();
-        keyIcon = GameObject.FindWithTag("KeyIcon");
+        Time.timeScale = 1f;
+
         key = GameObject.FindWithTag("Key");
-        pauseScreen = GameObject.FindWithTag("PauseMenu");
         door = GameObject.FindWithTag("Door")?.GetComponent<SpriteRenderer>();
 
         playerHealth = FindFirstObjectByType<Health>();
@@ -66,17 +60,14 @@ public class GameManager : MonoBehaviour
         keySpawned = false;
         keyIconOn = false;
 
-        if (pauseScreen != null)
+        if (UIManager.instance != null)
         {
-            pauseScreen.SetActive(false);
-            Debug.Log("No Pause Menu avalible");
+            UIManager.instance.ShowPause(false);
+            UIManager.instance.ShowKeyIcon(false);
         }
 
         if (scene.buildIndex < gamePlayLevelCount)
         {
-            if (keyIcon != null)
-                keyIcon.SetActive(false);
-
             if (key != null)
                 key.SetActive(false);
 
@@ -95,37 +86,25 @@ public class GameManager : MonoBehaviour
         timeElapsed += Time.deltaTime;
         int minutes = Mathf.FloorToInt(timeElapsed / 60);
         int seconds = Mathf.FloorToInt(timeElapsed % 60);
-        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+        string formatted = string.Format("{0:00}:{1:00}", minutes, seconds);
+        
+        if (UIManager.instance != null)
+            UIManager.instance.SetTime(formatted);
     } 
 
     void Menu()
     {
+        if (UIManager.instance == null || pauseMenu == null)
+            return;
+
         if (pauseMenu.WasPressedThisFrame())
         {
-            if (pauseScreen.activeInHierarchy)
-            {
-                PauseGame(false);
-            }
-            else
-            {
-                PauseGame(true);
-            }
-        }
-    }
+            bool isOpen = UIManager.instance.pauseScreen.activeInHierarchy;
+            UIManager.instance.ShowPause(!isOpen);
 
-    public void PauseGame(bool status)
-    {
-        pauseScreen.SetActive(status);
-
-        if (status)
-        {
-            Time.timeScale = 0;
+            Time.timeScale = isOpen ? 1 : 0;
         }
-        else
-        {
-            Time.timeScale = 1;
-        }
- 
     }
     #endregion
     #region Next Level
@@ -136,27 +115,34 @@ public class GameManager : MonoBehaviour
             if (!keySpawned && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0)
             {
                 keySpawned = true;
-
+                
                 if (key != null)
                     key.SetActive(true);
 
+
                 if (door != null && changeDoor.Length > 1)
                     door.sprite = changeDoor[1];
-
-                if (keyIconOn == true)
+                
+                if (keyIconOn == false)
                 {
-                    if (keyIcon != null)
-                        keyIcon.SetActive(false);
+                    if (UIManager.instance != null)
+                    {
+                        UIManager.instance.ShowKeyIcon(false);
+                    }
                 }
             }
         }
     }
     public void HasKey()
     {
-        if (keyIcon != null)
-            keyIcon.SetActive(true);
-        if (key != null)
-            key.SetActive(false);
+        UIManager.instance.ShowKeyIcon(true);
     }
     #endregion
+    public void RestartGameState()
+    {
+        Time.timeScale = 0;
+        timeElapsed = 0;
+        keySpawned = false;
+        keyIconOn = false;
+    }
 }
