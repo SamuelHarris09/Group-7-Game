@@ -1,8 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BatAtatck : MonoBehaviour
@@ -23,10 +19,10 @@ public class BatAtatck : MonoBehaviour
 
     void Update()
     {
-        batAttackCheck();
+        BatAttackCheck();
     }
 
-    void batAttackCheck()
+    void BatAttackCheck()
     {
         if(canAttack == true)
         {
@@ -58,6 +54,4 @@ public class BatAtatck : MonoBehaviour
         canAttack = true;
         yield return null;
     }
-
-
 }

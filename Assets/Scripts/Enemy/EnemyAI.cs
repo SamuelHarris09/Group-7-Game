@@ -11,11 +11,14 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float moveSpeed = 1f;
     [SerializeField] float agroRange = 5f;
 
+    //[SerializeField] Animator anim;
+
     private void Start()
     {
-        if (particles == true) { 
-        backWheelParticles.Play();
-        frontWheelParticles.Play();
+        if (particles == true) 
+        { 
+            backWheelParticles.Play();
+            frontWheelParticles.Play();
         }
     }
 
@@ -23,10 +26,15 @@ public class EnemyAI : MonoBehaviour
     {
         float distToPlayer = Vector2.Distance(transform.position, player.position);
 
-        if(distToPlayer < agroRange)
+        if (distToPlayer < agroRange)
         {
-            // Start chasing player
             ChasePlayer();
+
+            //anim.SetBool("isAttacking", true);
+        }
+        else
+        {
+            //anim.SetBool("isAttacking", false);
         }
 
         transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
