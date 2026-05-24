@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI timeText;
     public GameObject pauseScreen;
     public GameObject keyIcon;
+    public GameObject key;
 
     private void Awake()
     {
@@ -37,5 +38,11 @@ public class UIManager : MonoBehaviour
     {
         if (keyIcon != null)
             keyIcon.SetActive(value);
+    }
+
+    public void ShowKey(bool value)
+    {
+        if (key != null) 
+            key.SetActive(value);
     }
 }

@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -10,7 +9,6 @@ public class GameManager : MonoBehaviour
     [Header("Pause")]
     [SerializeField] public Sprite[] changeDoor;
     [SerializeField] private float gamePlayLevelCount = 5;
-    private GameObject key;
 
     private float timeElapsed = 0f;
     private bool keySpawned = false;
@@ -37,7 +35,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        key = GameObject.FindWithTag("Key");
         pauseMenu = InputSystem.actions.FindAction("Pause Menu");
     }
     
@@ -52,7 +49,6 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        key = GameObject.FindWithTag("Key");
         door = GameObject.FindWithTag("Door")?.GetComponent<SpriteRenderer>();
 
         playerHealth = FindFirstObjectByType<Health>();
@@ -68,9 +64,6 @@ public class GameManager : MonoBehaviour
 
         if (scene.buildIndex < gamePlayLevelCount)
         {
-            if (key != null)
-                key.SetActive(false);
-
             if (door != null && changeDoor.Length > 0)
                 door.sprite = changeDoor[0];
         }
@@ -116,10 +109,11 @@ public class GameManager : MonoBehaviour
             {
                 keySpawned = true;
                 
-                if (key != null)
-                    key.SetActive(true);
-
-
+                if (keySpawned == true)
+                {
+                    UIManager.instance.ShowKey(true);
+                }
+               
                 if (door != null && changeDoor.Length > 1)
                     door.sprite = changeDoor[1];
                 
@@ -136,6 +130,7 @@ public class GameManager : MonoBehaviour
     public void HasKey()
     {
         UIManager.instance.ShowKeyIcon(true);
+        UIManager.instance.ShowKey(false);
     }
     #endregion
     public void RestartGameState()
