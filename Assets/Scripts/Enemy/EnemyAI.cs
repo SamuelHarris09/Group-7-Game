@@ -10,11 +10,12 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] float moveSpeed = 1f;
     [SerializeField] float agroRange = 5f;
-
-    //[SerializeField] Animator anim;
+    
+    Animator animtor;
 
     private void Start()
     {
+        animtor = GetComponentInChildren<Animator>();
         if (particles == true) 
         { 
             backWheelParticles.Play();
@@ -30,11 +31,11 @@ public class EnemyAI : MonoBehaviour
         {
             ChasePlayer();
 
-            //anim.SetBool("isAttacking", true);
+            animtor.SetBool("isAttacking", true);
         }
         else
         {
-            //anim.SetBool("isAttacking", false);
+            animtor.SetBool("isAttacking", false);
         }
 
         transform.Translate(moveSpeed * Time.deltaTime, 0, 0);

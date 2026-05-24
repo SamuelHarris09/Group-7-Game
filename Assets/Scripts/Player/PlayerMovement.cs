@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canDash = true;
     private bool isDashing;
 
-    CameraController cameraController;
+    Animator animator;
 
     bool canControlPlayer = true;
 
@@ -48,8 +48,8 @@ public class PlayerMovement : MonoBehaviour
         crouchAction = InputSystem.actions.FindAction("Crouch");
         dashAction = InputSystem.actions.FindAction("Dash");
 
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        cameraController = GetComponent<CameraController>();
         currentSpeed = moveSpeed;
     }
 
@@ -67,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
             JumpTimer();
             FallThrough();
             Dash();
+            Animations();
         }
     }
     #region Movement
@@ -190,7 +191,35 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     #endregion
+    #region Animations
+    void Animations()
+    {
+        if (Mathf.Abs(rb.linearVelocity.x) > 0.1f)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
 
+        if (rb.linearVelocity.y > 0.1f)
+        {
+            animator.SetBool("isJumping", true);
+            animator.SetBool("isFalling", false);
+        }
+        else if (rb.linearVelocity.y < -0.1f)
+        {
+            animator.SetBool("isJumping", false);
+            animator.SetBool("isFalling", true);
+        }
+        else
+        {
+            animator.SetBool("isJumping", false);
+            animator.SetBool("isFalling", false);
+        }
+    }
+    #endregion
     public void Death()
     {
         canControlPlayer = false;

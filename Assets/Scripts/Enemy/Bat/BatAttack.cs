@@ -10,16 +10,28 @@ public class BatAtatck : MonoBehaviour
     [SerializeField] public bool canAttack = true;
     int attackPointIndex = 0;
 
+    Animator animator;
+
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         player = GetComponent<Transform>();
         canAttack = true;
+
+        StartCoroutine(SwitchToIdle());
     }
 
     void Update()
     {
         BatAttackCheck();
+    }
+
+    IEnumerator SwitchToIdle()
+    {
+        yield return new WaitForSeconds(2f);
+
+        animator.SetBool("isIdle", true);
     }
 
     void BatAttackCheck()

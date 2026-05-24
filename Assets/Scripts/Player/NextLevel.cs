@@ -9,7 +9,6 @@ public class NextLevel : MonoBehaviour
     [SerializeField] float nextLevelWaitTime = 1.5f;
 
     public bool HasKey = false;
-    public GameObject key;
 
     GameManager gameManager;
 
