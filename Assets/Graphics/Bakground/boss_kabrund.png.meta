@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 02566eaa2918e224d8093b74723cbd39
+guid: 38acaf65c41133440a1995d2a230ce2e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5968217576039146089
-    second: titel screen_0
+      213: 1392305784596159553
+    second: boss_kabrund_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: titel screen_0
+      name: boss_kabrund_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 79d91fd4cb1ac2da0800000000000000
-      internalID: -5968217576039146089
+      spriteID: 14c539dfbb6725310800000000000000
+      internalID: 1392305784596159553
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      titel screen_0: -5968217576039146089
+      boss_kabrund_0: 1392305784596159553
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
