@@ -37,7 +37,7 @@ public class BossMovement : MonoBehaviour
 
     [Header("Temporary Spear Hit Settings")]
     [SerializeField] private Transform weakPoint;
-    [SerializeField] private float hitRadius = 2f;
+    [SerializeField] private float hitRadius = 1f;
 
     [Header("Wave 1")]
     [SerializeField] private GameObject handWave1;
