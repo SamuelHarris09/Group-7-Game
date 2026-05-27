@@ -58,7 +58,7 @@ public class BossMovement : MonoBehaviour
     [SerializeField] private GameObject Wave2Platforms;
     [SerializeField] private int wave2Repetitions = 3;
     [SerializeField] private float wave2WaitTime = 1.5f;
-    [SerializeField] private float wave2RepetTime = 1.5f;
+    //[SerializeField] private float wave2RepetTime = 1.5f;
 
     [Header("Wave 3")]
     [SerializeField] private GameObject handWave3;

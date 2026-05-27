@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1023939381676028880}
   - component: {fileID: 3469294781636306706}
   - component: {fileID: 6125224262905298526}
-  - component: {fileID: 6448057007096578321}
+  - component: {fileID: 3629112924755579273}
   m_Layer: 0
   m_Name: Gambilng Machine
   m_TagString: Gambling Machine
@@ -140,7 +140,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.52, y: 3.41}
   m_EdgeRadius: 0
---- !u!114 &6448057007096578321
+--- !u!114 &3629112924755579273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,106 +149,102 @@ MonoBehaviour:
   m_GameObject: {fileID: 3154718118529563845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e32ca6a7f379fe64db0b42fd2dbc73f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c3918b1aa63804479138641b13e7643, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GamblingMachine
+  m_EditorClassIdentifier: Assembly-CSharp::SlotMachine
   symbols:
   - sprite: {fileID: -3204970635726831865, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
     value: 1
-    specialValue: 0
   - sprite: {fileID: 2772920197833770750, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
     value: 2
-    specialValue: 1
   - sprite: {fileID: -3851859884506429160, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
     value: 3
-    specialValue: 2
   - sprite: {fileID: -1925883457515284356, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
     value: 4
-    specialValue: 3
   - sprite: {fileID: -574424115894795592, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
     value: 5
-    specialValue: 4
   - sprite: {fileID: -5500325910660290272, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
     value: 6
-    specialValue: 5
   - sprite: {fileID: 5841791779998999052, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
     value: 7
-    specialValue: 6
   - sprite: {fileID: -2149884339218450984, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
     value: 8
-    specialValue: 7
   - sprite: {fileID: -8603074486172259262, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
     value: 9
-    specialValue: 8
   rewards:
+  - minValue: 3
+    maxValue: 0
+    powerUp:
+      powerUpName: 
+      type: 0
+      amount: 0
+      description: 
+      icon: {fileID: 0}
   - minValue: 1
     maxValue: 3
     powerUp:
-      powerUpName: Speed 1
+      powerUpName: 
       type: 0
-      amount: 1.2
-      description: You got a hole faster now
+      amount: 0
+      description: 
       icon: {fileID: 0}
   - minValue: 4
     maxValue: 6
     powerUp:
-      powerUpName: Speed 2
+      powerUpName: 
       type: 0
-      amount: 1.5
-      description: You got a hole faster now x2
+      amount: 0
+      description: 
       icon: {fileID: 0}
   - minValue: 7
     maxValue: 9
     powerUp:
-      powerUpName: Health 1
-      type: 1
-      amount: 1.5
-      description: You ate a sallad
-      icon: {fileID: 0}
-  - minValue: 10
-    maxValue: 12
-    powerUp:
-      powerUpName: Health 2
-      type: 1
-      amount: 0.75
-      description: You lost some blood
+      powerUpName: 
+      type: 0
+      amount: 0
+      description: 
       icon: {fileID: 0}
   - minValue: 13
     maxValue: 15
     powerUp:
-      powerUpName: Slowness 1
-      type: 2
-      amount: 0.8
-      description: You hit your knee in the table
+      powerUpName: 
+      type: 0
+      amount: 0
+      description: 
       icon: {fileID: 0}
   - minValue: 16
     maxValue: 18
     powerUp:
-      powerUpName: Slowness 2
-      type: 2
-      amount: 0.5
-      description: You lost your leg.
+      powerUpName: 
+      type: 0
+      amount: 0
+      description: 
       icon: {fileID: 0}
   - minValue: 19
     maxValue: 21
     powerUp:
-      powerUpName: Dash 1
-      type: 4
-      amount: 1.25
-      description: You drank a energy drink
+      powerUpName: 
+      type: 0
+      amount: 0
+      description: 
       icon: {fileID: 0}
   - minValue: 22
     maxValue: 24
     powerUp:
-      powerUpName: Dash 2
-      type: 3
-      amount: 2
-      description: You got longer legs
+      powerUpName: 
+      type: 0
+      amount: 0
+      description: 
       icon: {fileID: 0}
-  slotImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - minValue: 25
+    maxValue: 27
+    powerUp:
+      powerUpName: 
+      type: 0
+      amount: 0
+      description: 
+      icon: {fileID: 0}
+  slotImages: []
   spinSprites:
   - {fileID: -3204970635726831865, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
   - {fileID: 2772920197833770750, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
@@ -259,13 +255,13 @@ MonoBehaviour:
   - {fileID: 5841791779998999052, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
   - {fileID: -2149884339218450984, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
   - {fileID: -8603074486172259262, guid: e18fa586b6d8ae24bb56c4a7712f8e27, type: 3}
-  rewardIcon: {fileID: 0}
-  rewardText: {fileID: 0}
-  spinFrameDelay: 0.1
+  powerUpIcon: {fileID: 0}
+  powerUpText: {fileID: 0}
+  speed: 0.1
   spinDurations:
-  - 1
   - 1.5
   - 2
+  - 2.5
 --- !u!1 &7452405477336495584
 GameObject:
   m_ObjectHideFlags: 0

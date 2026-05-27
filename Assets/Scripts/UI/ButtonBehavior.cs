@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonBehavior : MonoBehaviour
 {
+    bool isOn = false;
     #region UI Buttons
     public void PlayGame()
     {
@@ -53,6 +54,44 @@ public class ButtonBehavior : MonoBehaviour
     public void PausGame(bool staus)
     {
         ControlsMenu.SetActive(staus);
+    }
+    #endregion
+    #region Slot Machine
+    [SerializeField] private GameObject slotMachineMenu;
+
+    SlotMachine slotMachine;
+
+    public void SlotMachineMenuOn()
+    {
+        SlotMachineMenu(true);
+    }
+
+    public void SlotMachineMenuOff()
+    {
+        SlotMachineMenu(false);
+    }
+
+    public void SlotMachineMenu(bool status)
+    {
+        slotMachineMenu.SetActive(status);
+
+        if (status)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+
+    public void SlotMachineOn()
+    {
+        if (isOn == false)
+        {
+            StartCoroutine(slotMachine.SpinRoutine());
+            isOn = true;
+        }
     }
     #endregion
 }

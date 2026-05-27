@@ -224,9 +224,4 @@ public class PlayerMovement : MonoBehaviour
     {
         canControlPlayer = false;
     }
-
-    public void Alive()
-    {
-        canControlPlayer = true;
-    }
 }
