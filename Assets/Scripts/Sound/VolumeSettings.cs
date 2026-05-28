@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 public class VolumeSettings : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private Slider playerVolumeSlider;
+    [SerializeField] private Slider jumpSoundSlider;
     [SerializeField] private Slider backgroundVolumeSlider;
     [SerializeField] private Slider menuVolumeSlider;
 
@@ -25,32 +25,33 @@ public class VolumeSettings : MonoBehaviour
 
     public void SetJumpVolume()
     {
-        float volume = playerVolumeSlider.value;
-        audioMixer.SetFloat("Jump", Mathf.Log10(volume)*20);
+        float volume = jumpSoundSlider.value;
+        audioMixer.SetFloat("Jump", Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20);
         PlayerPrefs.SetFloat("JumpVolume", volume);
     }
 
     public void SetBackgroundVolume()
     {
         float volume = backgroundVolumeSlider.value;
-        audioMixer.SetFloat("Background", Mathf.Log10(volume) * 20);
+        audioMixer.SetFloat("Background", Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20);
         PlayerPrefs.SetFloat("BackgroundVolume", volume);
     }
 
     public void SetMenuVolume()
     {
-        float volume = backgroundVolumeSlider.value;
-        audioMixer.SetFloat("Menu", Mathf.Log10(volume) * 20);
+        float volume = menuVolumeSlider.value;
+        audioMixer.SetFloat("Menu", Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20);
         PlayerPrefs.SetFloat("MenuVolume", volume);
     }
 
     private void LoadVolume()
     {
-        playerVolumeSlider.value = PlayerPrefs.GetFloat("JumpVolume");
+        menuVolumeSlider.value = PlayerPrefs.GetFloat("MenuVolume");
+        jumpSoundSlider.value = PlayerPrefs.GetFloat("JumpVolume");
         backgroundVolumeSlider.value = PlayerPrefs.GetFloat("BackgroundVolume");
 
+        SetMenuVolume();
         SetJumpVolume();
         SetBackgroundVolume();
-        SetMenuVolume();
     }
 }

@@ -9,6 +9,7 @@ public class AttackWarning : MonoBehaviour
     [SerializeField] private float maxAlpha = 0.7f;
 
     private SpriteRenderer spriteRenderer;
+    public bool correct;
 
     private void Awake()
     {
@@ -17,7 +18,10 @@ public class AttackWarning : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, duration);
+        if (correct == true)
+        {
+            Destroy(gameObject, duration);
+        }
     }
 
     private void Update()

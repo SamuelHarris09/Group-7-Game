@@ -97,6 +97,6 @@ public class DifficultyManager : MonoBehaviour
     }
 
     // This is how to set the value to other scripts, which will sit under Start()
-    // for example: damage = DifficultyManager.instance.gombaDamage; 
+    // for example: damage = DifficultyManager.Instance.gombaDamage; 
     // To get the current difficulty you write the following: "PlayerPrefs.GetInt("Difficulty");" Under Start() as well
 }

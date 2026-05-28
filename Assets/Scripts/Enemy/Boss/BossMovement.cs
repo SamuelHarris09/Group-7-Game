@@ -88,6 +88,9 @@ public class BossMovement : MonoBehaviour
         Wave1Platforms.SetActive(true);
         Wave2Platforms.SetActive(false);
 
+        attackWarningDiagonalLeft.SetActive(false);
+        attackWarningDiagonalRight.SetActive(false);
+
         visuals = transform.Find("Visuals").GetComponent<SpriteRenderer>();
         bossCollider = GetComponentInChildren<CircleCollider2D>(); 
     }
@@ -287,19 +290,18 @@ public class BossMovement : MonoBehaviour
         while (Vector2.Distance(leftHand.position, leftTarget) > 0.05f ||
                Vector2.Distance(rightHand.position, rightTarget) > 0.05f)
         {
-            leftHand.position = Vector2.MoveTowards(
+            leftHand.SetPositionAndRotation(Vector2.MoveTowards(
                 current: leftHand.position,
                 target: leftTarget,
                 maxDistanceDelta: moveSpeed2 * Time.deltaTime
-            );
+            ), Quaternion.Euler(0f, 0f, 180f));
 
-            rightHand.position = Vector2.MoveTowards(
+            rightHand.SetPositionAndRotation(Vector2.MoveTowards(
                 current: rightHand.position,
                 target: rightTarget,
                 maxDistanceDelta: moveSpeed2 * Time.deltaTime
-            );
+            ), Quaternion.Euler(0f, 0f, 180f));
 
-            
             yield return null;
         }
     }
@@ -467,26 +469,26 @@ public class BossMovement : MonoBehaviour
 
     IEnumerator ShowLeftDiagonalWarning(Vector2 position, Vector2 size)
     {
-        if (attackWarningDiagonalLeft == null)
-            yield break;
+        attackWarningDiagonalLeft.transform.position = position;
+        attackWarningDiagonalLeft.transform.localScale = size;
 
-        GameObject warning = Instantiate(attackWarningDiagonalLeft, position, Quaternion.identity);
-
-        warning.transform.localScale = size;
+        attackWarningDiagonalLeft.SetActive(true);
 
         yield return new WaitForSeconds(warningDuration);
+
+        attackWarningDiagonalLeft.SetActive(false);
     }
 
     IEnumerator ShowRightDiagonalWarning(Vector2 position, Vector2 size)
     {
-        if (attackWarningDiagonalRight == null)
-            yield break;
+        attackWarningDiagonalRight.transform.position = position;
+        attackWarningDiagonalRight.transform.localScale = size;
 
-        GameObject warning = Instantiate(attackWarningDiagonalRight, position, Quaternion.identity);
-
-        warning.transform.localScale = size;
+        attackWarningDiagonalRight.SetActive(true);
 
         yield return new WaitForSeconds(warningDuration);
+
+        attackWarningDiagonalRight.SetActive(false);
     }
 
     #endregion

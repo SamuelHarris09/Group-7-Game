@@ -98,7 +98,16 @@ public class GameManager : MonoBehaviour
 
             Time.timeScale = isOpen ? 1 : 0;
 
-            //SoundManager.PlaySound(SoundType.Menu) = isOpen ? 1 : 0;
+            if (isOpen)
+            {
+                SoundManager.Instance.PauseBackgroundMusic();
+                SoundManager.Instance.PlayMenuMusic();
+            }
+            else
+            {
+                SoundManager.Instance.ResumeBackgroundMusic();
+                SoundManager.Instance.StopMenuMusic();
+            }
         }
     }
     #endregion
