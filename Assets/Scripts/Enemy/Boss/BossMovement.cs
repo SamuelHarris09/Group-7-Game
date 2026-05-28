@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class BossMovement : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class BossMovement : MonoBehaviour
 
     [Header("Boss defeated")]
     [SerializeField] private GameObject finishMenu;
-    [SerializeField] private Sprite[] bossDamage;
+    [SerializeField] private Sprite[] bossDamaged;
 
     [Header("Weak Point")]
     [SerializeField] private WeakPointVisual weakPointVisual;
@@ -74,7 +75,9 @@ public class BossMovement : MonoBehaviour
     [SerializeField] private BossState currentState = BossState.Wave1;
     [SerializeField] private float startDelay = 3f;
     public Transform playerSpear;
-    
+
+    [HideInInspector] public bool reset;
+
     SpriteRenderer visuals;
     CircleCollider2D bossCollider;
     #endregion
@@ -85,11 +88,8 @@ public class BossMovement : MonoBehaviour
         Wave1Platforms.SetActive(true);
         Wave2Platforms.SetActive(false);
 
-        attackWarningDiagonalLeft.SetActive(false);
-        attackWarningDiagonalRight.SetActive(false);
-
         visuals = transform.Find("Visuals").GetComponent<SpriteRenderer>();
-        bossCollider = GetComponentInChildren<CircleCollider2D>();
+        bossCollider = GetComponentInChildren<CircleCollider2D>(); 
     }
 
     private void Update()
@@ -131,6 +131,7 @@ public class BossMovement : MonoBehaviour
     #region Wave 1
     IEnumerator Wave1()
     {
+        reset = false;
         yield return new WaitForSeconds(startDelay);
         SetWave1PlatformActive(true);
         SetWave2PlatformActive(false);
@@ -156,12 +157,12 @@ public class BossMovement : MonoBehaviour
 
             if (sweepLeftToRight)
             {
-                handWave1.transform.position = leftPos;
+                handWave1.transform.SetPositionAndRotation(leftPos, Quaternion.Euler(0f, 0f, 90f));
                 yield return StartCoroutine(MoveToPosition(handWave1.transform, rightPos));
             }
             else
             {
-                handWave1.transform.position = rightPos;
+                handWave1.transform.SetPositionAndRotation(rightPos, Quaternion.Euler(0f, 0f, 270f));
                 yield return StartCoroutine(MoveToPosition(handWave1.transform, leftPos));
             }
 
@@ -191,6 +192,7 @@ public class BossMovement : MonoBehaviour
         }
 
         damageWindowActive = false;
+        reset = true;
         weakPointVisual.SetActive(false);
         currentState = BossState.Wave1;
     }
@@ -222,10 +224,10 @@ public class BossMovement : MonoBehaviour
     IEnumerator Wave2()
     {
         weakPointVisual.SetActive(false);
-
+        reset = false;
         yield return new WaitForSeconds(2f);
 
-        visuals.sprite = bossDamage[0];
+        visuals.sprite = bossDamaged[0];
         SetWave1PlatformActive(false);
         SetWave2PlatformActive(true);
 
@@ -275,6 +277,7 @@ public class BossMovement : MonoBehaviour
 
             damageWindowActive = false;
             weakPointVisual.SetActive(false);
+            reset = true;
             currentState = BossState.Wave2;
         }
     }
@@ -296,6 +299,7 @@ public class BossMovement : MonoBehaviour
                 maxDistanceDelta: moveSpeed2 * Time.deltaTime
             );
 
+            
             yield return null;
         }
     }
@@ -303,8 +307,9 @@ public class BossMovement : MonoBehaviour
     #region Wave 3
     IEnumerator Wave3()
     {
+        reset = false;
         weakPointVisual.SetActive(false);
-        visuals.sprite = bossDamage[1];
+        visuals.sprite = bossDamaged[1];
 
         yield return new WaitForSeconds(2f);
 
@@ -365,6 +370,7 @@ public class BossMovement : MonoBehaviour
 
         damageWindowActive = false;
         weakPointVisual.SetActive(false);
+        reset = true;
         currentState = BossState.Wave3;
     }
 
@@ -383,6 +389,7 @@ public class BossMovement : MonoBehaviour
         {
             handTransform.position = Vector2.MoveTowards(
                 handTransform.position, target, moveSpeed3 * Time.deltaTime);
+            handTransform.rotation = Quaternion.Euler(0f, 0f, 180f);
 
             yield return null;
         }
@@ -460,26 +467,26 @@ public class BossMovement : MonoBehaviour
 
     IEnumerator ShowLeftDiagonalWarning(Vector2 position, Vector2 size)
     {
-        attackWarningDiagonalLeft.transform.position = position;
-        attackWarningDiagonalLeft.transform.localScale = size;
+        if (attackWarningDiagonalLeft == null)
+            yield break;
 
-        attackWarningDiagonalLeft.SetActive(true);
+        GameObject warning = Instantiate(attackWarningDiagonalLeft, position, Quaternion.identity);
+
+        warning.transform.localScale = size;
 
         yield return new WaitForSeconds(warningDuration);
-
-        attackWarningDiagonalLeft.SetActive(false);
     }
 
     IEnumerator ShowRightDiagonalWarning(Vector2 position, Vector2 size)
     {
-        attackWarningDiagonalRight.transform.position = position;
-        attackWarningDiagonalRight.transform.localScale = size;
+        if (attackWarningDiagonalRight == null)
+            yield break;
 
-        attackWarningDiagonalRight.SetActive(true);
+        GameObject warning = Instantiate(attackWarningDiagonalRight, position, Quaternion.identity);
+
+        warning.transform.localScale = size;
 
         yield return new WaitForSeconds(warningDuration);
-
-        attackWarningDiagonalRight.SetActive(false);
     }
 
     #endregion

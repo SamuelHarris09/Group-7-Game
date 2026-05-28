@@ -97,6 +97,8 @@ public class GameManager : MonoBehaviour
             UIManager.instance.ShowPause(!isOpen);
 
             Time.timeScale = isOpen ? 1 : 0;
+
+            //SoundManager.PlaySound(SoundType.Menu) = isOpen ? 1 : 0;
         }
     }
     #endregion

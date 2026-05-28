@@ -3,11 +3,10 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public float maxHealth = 100f;
+    public float currentHealth;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] GameObject deathMenu;
-    public float currentHealth;
 
-    EnemyDamageDealer enemyDamageDealer;
     PlayerMovement playerMovement;
     HealthBar healthBar;
     bool isDead = false;
@@ -16,8 +15,7 @@ public class Health : MonoBehaviour
     {
         healthBar = FindFirstObjectByType<HealthBar>();
         playerMovement = FindFirstObjectByType<PlayerMovement>();
-        enemyDamageDealer = FindFirstObjectByType<EnemyDamageDealer>();
-
+        
         if (deathMenu != null)
         {
             deathMenu.SetActive(false);
