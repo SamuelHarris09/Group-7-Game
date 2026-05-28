@@ -77,26 +77,26 @@ public class DifficultyManager : MonoBehaviour
                 break;
 
             case Difficulty.Normal:
-                batHealth = 4f;
-                batDamage = 4;
-                gombaHealth = 10f;
-                gombaDamage = 2;
+                batHealth = 20f;
+                batDamage = 10;
+                gombaHealth = 20f;
+                gombaDamage = 10;
                 skeletonHealth = 5f;
                 skeletonDamage = 10;
                 break;
 
             case Difficulty.Hard:
-                batHealth = 8f;
-                batDamage = 8;
-                gombaHealth = 20f;
-                gombaDamage = 4;
+                batHealth = 40f;
+                batDamage = 20;
+                gombaHealth = 40f;
+                gombaDamage = 20;
                 skeletonHealth = 10f;
                 skeletonDamage = 20;
                 break;
         }
     }
 
-    // how to set the vaule in the script, which will sit under Start()
+    // This is how to set the value to other scripts, which will sit under Start()
     // for example: damage = DifficultyManager.instance.gombaDamage; 
-    // how to get the currect difficulty from the "PlayerPrefs.GetInt("Difficulty");"
+    // To get the current difficulty you write the following: "PlayerPrefs.GetInt("Difficulty");" Under Start() as well
 }

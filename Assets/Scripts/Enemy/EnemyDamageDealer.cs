@@ -2,7 +2,22 @@ using UnityEngine;
 
 public class EnemyDamageDealer : MonoBehaviour
 {
-    [SerializeField] int enemyDamage = 5;
+    private int enemyDamage;
+
+    private bool gomba;
+    private bool bat;
+
+    private void Start()
+    {
+        if (gomba)
+        {
+            DifficultyManager.instance.gombaDamage = enemyDamage;
+        }
+        if (bat)
+        {
+            DifficultyManager.instance.batDamage = enemyDamage;
+        }
+    }
 
     public int GetDamage()
     {
