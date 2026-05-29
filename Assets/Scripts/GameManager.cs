@@ -100,13 +100,13 @@ public class GameManager : MonoBehaviour
 
             if (isOpen)
             {
-                SoundManager.Instance.PauseBackgroundMusic();
-                SoundManager.Instance.PlayMenuMusic();
+                SoundManager.instance.PauseBackgroundMusic();
+                SoundManager.instance.PlayMenuMusic();
             }
             else
             {
-                SoundManager.Instance.ResumeBackgroundMusic();
-                SoundManager.Instance.StopMenuMusic();
+                SoundManager.instance.ResumeBackgroundMusic();
+                SoundManager.instance.StopMenuMusic();
             }
         }
     }
@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour
                 if (keySpawned == true)
                 {
                     UIManager.instance.ShowKey(true);
+                    UIManager.instance.ShowSlotMachine(true);
                 }
                
                 if (door != null && changeDoor.Length > 1)
