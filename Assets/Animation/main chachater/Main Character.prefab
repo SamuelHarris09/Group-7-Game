@@ -255,9 +255,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 100
+  currentHealth: 10
   spriteRenderer: {fileID: 5344539917514522013}
   deathMenu: {fileID: 0}
-  currentHealth: 10
 --- !u!60 &7691035012908853803
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -741,7 +741,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -959,7 +959,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NextLevel
   nextLevelWaitTime: 1.5
   HasKey: 0
-  key: {fileID: 0}
 --- !u!114 &6317691057702901513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -975,7 +974,7 @@ MonoBehaviour:
   spear: {fileID: 1986198362710005474}
   PlacedSpear: {fileID: 0}
   spearActiveTime: 0.5
-  hasSpear: 1
+  hasSpear: 0
 --- !u!1 &3214441003380328322
 GameObject:
   m_ObjectHideFlags: 0

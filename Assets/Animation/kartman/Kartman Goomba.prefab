@@ -285,7 +285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca6aa6587d2935478fb5faa45e6b67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageDealer
-  enemyDamage: 5
 --- !u!1 &1628527493908863138
 GameObject:
   m_ObjectHideFlags: 0

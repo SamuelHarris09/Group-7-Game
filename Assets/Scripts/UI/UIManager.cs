@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject pauseScreen;
     public GameObject keyIcon;
     public GameObject key;
+    public GameObject slotMachine;
 
     private void Awake()
     {
@@ -44,5 +45,11 @@ public class UIManager : MonoBehaviour
     {
         if (key != null) 
             key.SetActive(value);
+    }
+
+    public void ShowSlotMachine(bool value)
+    {
+        if (slotMachine  != null) 
+            slotMachine.SetActive(value);
     }
 }
