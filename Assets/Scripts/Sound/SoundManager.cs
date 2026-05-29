@@ -6,7 +6,7 @@ public enum SoundType
 }
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance;
+    public static SoundManager instance;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip[] soundList;
@@ -22,14 +22,14 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null && Instance != this)
+        if (instance != null && instance != this)
         {
-            Destroy(Instance);
+            Destroy(gameObject);
             return;
         }
-        
-        Instance = this;
-        DontDestroyOnLoad(Instance);
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -39,7 +39,7 @@ public class SoundManager : MonoBehaviour
     #region SoundAffects
     public static void PlaySound(SoundType sound, float volume = 1f)
     {
-        Instance.sfxSource.PlayOneShot(Instance.soundList[(int)sound], volume);
+        instance.sfxSource.PlayOneShot(instance.soundList[(int)sound], volume);
     }
     #endregion
     #region Music
