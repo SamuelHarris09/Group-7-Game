@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 9008156290938757919}
   m_Layer: 8
   m_Name: Kartman Goomba
-  m_TagString: Enemy
+  m_TagString: Goomba
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,7 +253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58318683cae0ded479552076af7a0f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  currentHealth: 10
 --- !u!114 &6405336147288897985
 MonoBehaviour:
   m_ObjectHideFlags: 0

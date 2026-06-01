@@ -6,6 +6,12 @@ public class PlatformFallThrough : MonoBehaviour
 {
     [SerializeField] float fallCoolDown = 0.5f;
 
+    private Collider2D collider2d;
+
+    private void Start()
+    {
+        collider2d = GetComponent<Collider2D>();
+    }
     private void Update()
     {
         StartCoroutine(PressFall());
@@ -15,12 +21,12 @@ public class PlatformFallThrough : MonoBehaviour
     {
         if (Keyboard.current.sKey.wasPressedThisFrame)
         {
-            GetComponent<Collider2D>().enabled = false;
+            collider2d.enabled = false;
         }
         else if (Keyboard.current.sKey.wasReleasedThisFrame)
         {
             yield return new WaitForSeconds(fallCoolDown);
-            GetComponent<Collider2D>().enabled = true;
+            collider2d.enabled = true;
         }
     }
 }

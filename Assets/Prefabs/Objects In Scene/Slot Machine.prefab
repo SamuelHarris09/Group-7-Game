@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6125224262905298526}
   - component: {fileID: 3629112924755579273}
   m_Layer: 0
-  m_Name: Gambilng Machine
+  m_Name: Slot Machine
   m_TagString: Gambling Machine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

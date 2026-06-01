@@ -43,13 +43,13 @@ public class UIManager : MonoBehaviour
 
     public void ShowKey(bool value)
     {
-        if (key != null) 
+        if (key != null)
             key.SetActive(value);
     }
 
     public void ShowSlotMachine(bool value)
     {
-        if (slotMachine  != null) 
+        if (slotMachine != null)
             slotMachine.SetActive(value);
     }
 }

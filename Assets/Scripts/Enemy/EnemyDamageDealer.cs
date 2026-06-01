@@ -2,20 +2,21 @@ using UnityEngine;
 
 public class EnemyDamageDealer : MonoBehaviour
 {
-    private int enemyDamage;
-
-    private bool gomba;
-    private bool bat;
+    private readonly int enemyDamage;
 
     private void Start()
     {
-        if (gomba)
+        if (CompareTag("Gommba"))
         {
             DifficultyManager.instance.gombaDamage = enemyDamage;
         }
-        if (bat)
+        if (CompareTag("Bat"))
         {
             DifficultyManager.instance.batDamage = enemyDamage;
+        }
+        if (CompareTag("Skeleton"))
+        {
+            DifficultyManager.instance.skeletonDamage = enemyDamage;
         }
     }
 

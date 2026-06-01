@@ -45,9 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd1be4d8eafed244ac7cd9cdf67d722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpearLooker
-  mainCam: {fileID: 0}
-  mousePos: {x: 0, y: 0, z: 0}
-  spearAttackDelay: 0.33
 --- !u!1 &856021511057643523
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,7 +546,7 @@ GameObject:
   - component: {fileID: 6317691057702901513}
   m_Layer: 0
   m_Name: Main Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -933,12 +930,9 @@ MonoBehaviour:
   moveSpeed: 10
   crouchSpeed: 1
   jumpHeight: 13
-  jumpDistance: 2
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  coyoteTime: 0.1
-  jumpBufferTime: 0.1
   fallSpeed: -10
   platformFallSpeed: -20
   dashingPower: 24
@@ -958,7 +952,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NextLevel
   nextLevelWaitTime: 1.5
-  HasKey: 0
 --- !u!114 &6317691057702901513
 MonoBehaviour:
   m_ObjectHideFlags: 0

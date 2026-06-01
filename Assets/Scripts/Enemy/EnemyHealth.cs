@@ -2,7 +2,23 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private float currentHealth = 10f;
+    private float currentHealth = 10f;
+
+    private void Start()
+    {
+        if (CompareTag("Gommba"))
+        {
+            DifficultyManager.instance.gombaHealth = currentHealth;
+        }
+        if (CompareTag("Bat"))
+        {
+            DifficultyManager.instance.gombaHealth = currentHealth;
+        }
+        if (CompareTag("Skeleton"))
+        {
+            DifficultyManager.instance.skeletonHealth = currentHealth;
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

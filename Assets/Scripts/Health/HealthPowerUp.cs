@@ -2,17 +2,16 @@ using UnityEngine;
 
 public class HealthPowerUp : MonoBehaviour
 {
-    public float powerupValue = 10f;
+    private float powerupValue = 10f;
 
-    Health playerHealth;
-    GameManager gameManager;
+    private Health playerHealth;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            playerHealth.currentHealth = playerHealth.currentHealth + powerupValue;
-            //Destroy(gameManager.powerup);
+            playerHealth.currentHealth += powerupValue;
+            Destroy(gameObject);
         }
     }
 }

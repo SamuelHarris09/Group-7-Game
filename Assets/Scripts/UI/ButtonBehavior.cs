@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonBehavior : MonoBehaviour
 {
-    bool isOn = false;
+    private bool isOn = false;
     #region UI Buttons
     public void PlayGame()
     {

@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: -6712181516906062886}
   m_Layer: 8
   m_Name: Skeleton
-  m_TagString: Enemy
+  m_TagString: Skeleton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -250,4 +250,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58318683cae0ded479552076af7a0f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  currentHealth: 10

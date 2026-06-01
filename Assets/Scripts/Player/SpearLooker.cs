@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class SpearLooker : MonoBehaviour
 {
-    public Camera mainCam;
-    public Vector3 mousePos;
-    [SerializeField] float spearAttackDelay = 1f;
+    private Camera mainCam;
+    private Vector3 mousePos;
+    private float spearAttackDelay = 1f;
     private bool isAttacking = false;
 
     InputAction attackAction;
@@ -22,21 +22,21 @@ public class SpearLooker : MonoBehaviour
 
     public void MoveMouse()
     {
-        if (attackAction.WasPerformedThisFrame() && isAttacking == false)
+        if (attackAction.WasPerformedThisFrame() && !isAttacking)
         {
-           isAttacking = true;
-              
-           mousePos = mainCam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            isAttacking = true;
 
-           Vector3 rotation = mousePos - transform.position;
-           float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+            mousePos = mainCam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
-           transform.rotation = Quaternion.Euler(0, 0, rotZ);
-           StartCoroutine(DelayAction(spearAttackDelay));
+            Vector3 rotation = mousePos - transform.position;
+            float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(0, 0, rotZ);
+            StartCoroutine(DelayAction(spearAttackDelay));
         }
     }
 
-    IEnumerator DelayAction(float spearAttackDelay) 
+    IEnumerator DelayAction(float spearAttackDelay)
     {
         yield return new WaitForSeconds(spearAttackDelay);
         isAttacking = false;

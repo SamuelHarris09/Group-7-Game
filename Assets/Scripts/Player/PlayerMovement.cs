@@ -8,22 +8,23 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 2f;
     [SerializeField] float crouchSpeed = 1f;
     [SerializeField] float jumpHeight = 10f;
-    [SerializeField] float jumpDistance = 2f;
     [SerializeField] LayerMask groundLayer;
-    private float currentSpeed;
+    public float currentSpeed;
 
-    [Header("Coyote time")]
-    [SerializeField] float coyoteTime = 0.1f;
-    [SerializeField] float jumpBufferTime = 0.1f;
-    private float coyoteTimeCounter;
-    private float jumpBufferCounter;
+    //[Header("Coyote time")]
+    //[SerializeField] float jumpDistance = 2f;
+    //[SerializeField] float coyoteTime = 0.1f;
+    //[SerializeField] float jumpBufferTime = 0.1f;
+    //private float coyoteTimeCounter;
+    //private float jumpBufferCounter;
 
     [Header("Fall Through")]
     [SerializeField] float fallSpeed = -10f;
     [SerializeField] float platformFallSpeed = -20f;
 
     [Header("Dash")]
-    [SerializeField] private float dashingPower = 24f;
+    public float dashSpeed = 24f;
+    public float dashDistance = 2f;
     [SerializeField] private float dashingTime = 0.2f;
     [SerializeField] private float dashingCooldown = 1f;
     [SerializeField] private TrailRenderer trailRenderer;
@@ -56,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (canControlPlayer == true)
-        { 
+        {
             if (isDashing)
             {
                 return;
@@ -64,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
 
             Movement();
             Jump();
-            JumpTimer();
             FallThrough();
             Dash();
             Animations();
@@ -115,39 +115,14 @@ public class PlayerMovement : MonoBehaviour
     #region Jump & Coyote time
     void Jump()
     {
-        if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f)
+        if (jumpAction.WasPressedThisFrame())
         {
             rb.linearVelocityY = jumpHeight;
 
             SoundManager.PlaySound(SoundType.Jump);
 
-            coyoteTimeCounter = 0f;
-            jumpBufferCounter = 0f;
-        }
-    }
-
-    void JumpTimer()
-    {
-        RaycastHit2D ground = Physics2D.Raycast(transform.position, Vector2.down, jumpDistance, groundLayer);
-
-        // Ground check
-        if (ground.collider != null)
-        {
-            coyoteTimeCounter = coyoteTime;
-        }
-        else
-        {
-            coyoteTimeCounter -= Time.deltaTime;
-        }
-
-        // Jump buffer
-        if (jumpAction.WasPressedThisFrame())
-        {
-            jumpBufferCounter = jumpBufferTime;
-        }
-        else
-        {
-            jumpBufferCounter -= Time.deltaTime;
+            //coyoteTimeCounter = 0f;
+            //jumpBufferCounter = 0f;
         }
     }
     #endregion
@@ -156,17 +131,17 @@ public class PlayerMovement : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
-        
+
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
 
         if (Keyboard.current.dKey.isPressed)
         {
-            rb.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+            rb.linearVelocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
         }
         else if (Keyboard.current.aKey.isPressed)
         {
-            rb.linearVelocity = new Vector2(transform.localScale.x * -dashingPower, 0f);
+            rb.linearVelocity = new Vector2(transform.localScale.x * -dashSpeed, 0f);
         }
 
         trailRenderer.emitting = true;

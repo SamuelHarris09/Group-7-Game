@@ -15,7 +15,7 @@ public class Health : MonoBehaviour
     {
         healthBar = FindFirstObjectByType<HealthBar>();
         playerMovement = FindFirstObjectByType<PlayerMovement>();
-        
+
         if (deathMenu != null)
         {
             deathMenu.SetActive(false);
@@ -40,7 +40,7 @@ public class Health : MonoBehaviour
         EnemyDamageDealer enemyDamageDealer = other.GetComponent<EnemyDamageDealer>();
 
         if (enemyDamageDealer != null)
-        { 
+        {
             TakeDamage(enemyDamageDealer.GetDamage());
             Debug.Log(currentHealth);
         }

@@ -8,13 +8,14 @@ public class NextLevel : MonoBehaviour
     [Header("Next level wait time")]
     [SerializeField] float nextLevelWaitTime = 1.5f;
 
-    public bool HasKey = false;
+    private bool HasKey;
 
     GameManager gameManager;
 
     private void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
+        HasKey = false;
     }
 
     private void Update()

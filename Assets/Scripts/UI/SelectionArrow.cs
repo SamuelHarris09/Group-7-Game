@@ -8,7 +8,7 @@ public class SelectionArrow : MonoBehaviour
     [Header("Music & SFX")]
     [SerializeField] AudioClip changeSound;
     [SerializeField, Range(0, 1)] float changeVolume;
-    
+
     [SerializeField] AudioClip interactSound;
     [SerializeField, Range(0, 1)] float interactVolume;
 
@@ -21,7 +21,7 @@ public class SelectionArrow : MonoBehaviour
         {
             ChangePosition(-1);
         }
-        
+
         if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame)
         {
             ChangePosition(1);
@@ -37,7 +37,7 @@ public class SelectionArrow : MonoBehaviour
     {
         currentPosition += _change;
 
-        if(_change != 0)
+        if (_change != 0)
         {
             //AudioSource.PlayClipAtPoint(changeSound, transform.position, changeVolume);
         }

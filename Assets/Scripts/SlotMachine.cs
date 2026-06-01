@@ -181,23 +181,23 @@ public class SlotMachine : MonoBehaviour
         switch (powerUp.type)
         {
             case PowerUpType.Speed:
-                // player.speed *= powerUp.amount;
+                player.currentSpeed *= powerUp.amount;
                 break;
 
             case PowerUpType.Health:
-                // playerHealth.currentHealth += powerUp.amount;
+                playerHealth.currentHealth += powerUp.amount;
                 break;
 
             case PowerUpType.DashSpeed:
-                // player.dashSpeed *= powerUp.amount;
+                player.dashSpeed *= powerUp.amount;
                 break;
 
             case PowerUpType.DashLength:
-                //player.dashLength += powerUp.amount;
+                player.dashDistance += powerUp.amount;
                 break;
 
             case PowerUpType.Slowness:
-                // player.speed *= powerUp.amount;
+                player.currentSpeed *= powerUp.amount;
                 break;
         }
     }
@@ -212,7 +212,6 @@ public class SlotMachine : MonoBehaviour
     }
     #endregion
     #region Interaction
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

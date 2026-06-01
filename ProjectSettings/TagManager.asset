@@ -4,18 +4,20 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Enemy
   - Spear
   - Key
   - Door
   - PlacedSpear
   - TimeText
   - Ground
-  - Boundery
   - KeyIcon
   - Gambling Machine
   - PauseMenu
   - DeathMenu
+  - Goomba
+  - Bat
+  - Skeleton
+  - Enemy
   layers:
   - Default
   - TransparentFX

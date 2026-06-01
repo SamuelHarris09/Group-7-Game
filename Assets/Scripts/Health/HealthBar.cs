@@ -7,7 +7,7 @@ public class HealthBar : MonoBehaviour
     private float playerHealthUI = 100f;
 
     Health playerHealth;
-    
+
     private void Start()
     {
         playerHealth = FindFirstObjectByType<Health>();
@@ -20,7 +20,7 @@ public class HealthBar : MonoBehaviour
             Debug.Log("There is no health to update");
             return;
         }
-            
+
         float health = playerHealth.currentHealth;
         if (health > 0)
         {
@@ -29,7 +29,6 @@ public class HealthBar : MonoBehaviour
 
         float healthPerHearth = playerHealthUI / hearts.Length;
         int heartsToShow = Mathf.CeilToInt(health / healthPerHearth);
-
 
         for (int i = 0; i < hearts.Length; i++)
         {

@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 6572246212538210894}
   m_Layer: 8
   m_Name: Larry da Bird
-  m_TagString: Enemy
+  m_TagString: Bat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -497,7 +497,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58318683cae0ded479552076af7a0f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  currentHealth: 10
 --- !u!114 &6572246212538210894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,7 +509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca6aa6587d2935478fb5faa45e6b67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageDealer
-  enemyDamage: 5
 --- !u!1 &6446080483657855788
 GameObject:
   m_ObjectHideFlags: 0

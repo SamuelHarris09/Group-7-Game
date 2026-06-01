@@ -11,7 +11,7 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("Bools")]
     public bool hasSpear = false;
-    bool canAttack = true;
+    private bool canAttack = true;
 
     InputAction attackAction;
 
@@ -20,6 +20,7 @@ public class PlayerAttack : MonoBehaviour
         attackAction = InputSystem.actions.FindAction("Attack");
         spear.SetActive(false);
     }
+
     private void Update()
     {
         CheckScene();
@@ -64,7 +65,7 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(spearActiveTime);
 
         spear.SetActive(false);
-        
+
         canAttack = true;
     }
 }

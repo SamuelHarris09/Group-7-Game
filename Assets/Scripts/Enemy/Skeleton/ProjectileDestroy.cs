@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class ProjectileDestroy : MonoBehaviour
 {
-    [SerializeField] float enemyProjectilePrefabDelay = 1f;
+    private readonly float enemyProjectilePrefabDelay = 1f;
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (CompareTag("Ground"))
+        int layerIndex = LayerMask.NameToLayer("Wall");
+
+        if (other.gameObject.layer == layerIndex)
         {
             Destroy(other.gameObject, enemyProjectilePrefabDelay);
 

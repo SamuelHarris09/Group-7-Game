@@ -6,7 +6,7 @@ public class DifficultyManager : MonoBehaviour
 {
     public static DifficultyManager instance;
 
-    [SerializeField] private float optionsScene;
+    private readonly float optionsScene;
 
     public TMP_Dropdown dropdown;
     public Difficulty currentDifficulty;
@@ -49,7 +49,7 @@ public class DifficultyManager : MonoBehaviour
                 dropdown.value = savedIndex;
             }
         }
-        
+
         ApplyDifficulty();
     }
 

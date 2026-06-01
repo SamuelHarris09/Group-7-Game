@@ -876,6 +876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonBehavior
   ControlsMenu: {fileID: 8597052093088830545}
+  slotMachineMenu: {fileID: 0}
 --- !u!114 &8636221283643542292
 MonoBehaviour:
   m_ObjectHideFlags: 0
