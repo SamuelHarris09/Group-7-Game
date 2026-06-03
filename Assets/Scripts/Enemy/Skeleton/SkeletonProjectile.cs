@@ -1,55 +1,48 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class SkeletonProjectile : MonoBehaviour
 {
     [Header("Base Variables")]
-    [SerializeField] GameObject projectilePrefab;
-    [SerializeField] float leftSpeed = 10f;
-    [SerializeField] float rightSpeed = 10f;
-    [SerializeField] float projectileLifetime = 5f;
-    [SerializeField] float baseFireRate = 0.2f;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private float projectileSpeed = 10f;
+    [SerializeField] private float projectileLifetime = 5f;
 
-    [Header("AI Variables")]
-    [SerializeField] bool useAI = false;
-    [SerializeField] float minimumFireRate = 0.2f;
-    [SerializeField] float fireRateVariance = 0f;
+    [SerializeField] private float baseFireRate = 0.2f;
+    [SerializeField] private float minimumFireRate = 0.2f;
+    [SerializeField] private float fireRateVariance = 0f;
 
     [HideInInspector] public bool isFiring;
+    private float rightSpeed;
+    private float leftSpeed;
 
-    Coroutine fireCoroutine;
+    private Coroutine fireCoroutine;
 
-    float direction;
+    private SkeletonAI skeletonAI;
 
-    SkeletonAI skeletonAI;
-
-    void Start()
+    private void Awake()
     {
-        if (useAI)
-        {
-            isFiring = true;
-        }
+        skeletonAI = GetComponent<SkeletonAI>();
+
+        rightSpeed = projectileSpeed * 1;
+        leftSpeed = projectileSpeed * -1;
     }
 
-    void Update()
+    private void Update()
     {
         Fire();
         Direction();
     }
 
-    void Direction()
+    private void Direction()
     {
-        if (skeletonAI.GetFacingRight())
+        if (skeletonAI.isFacingRight)
         {
-            direction = leftSpeed;
-        }
-        else if (skeletonAI.GetFacingLeft()) 
-        {
-            direction = rightSpeed;
+            projectileSpeed = rightSpeed;
         }
     }
 
-    void Fire()
+    private void Fire()
     {
         if (isFiring && fireCoroutine == null)
         {
@@ -62,14 +55,14 @@ public class SkeletonProjectile : MonoBehaviour
         }
     }
 
-    IEnumerator FireContinuously()
+    private IEnumerator FireContinuously()
     {
         while (true)
         {
             GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
             Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
-            projectileRB.linearVelocityX = direction;
+            projectileRB.linearVelocityX = projectileSpeed;
 
             Destroy(projectile, projectileLifetime);
 

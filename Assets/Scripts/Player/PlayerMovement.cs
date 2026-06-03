@@ -8,15 +8,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 2f;
     [SerializeField] float crouchSpeed = 1f;
     [SerializeField] float jumpHeight = 10f;
+    [SerializeField] float jumpDistance = 2f;
     [SerializeField] LayerMask groundLayer;
     public float currentSpeed;
-
-    //[Header("Coyote time")]
-    //[SerializeField] float jumpDistance = 2f;
-    //[SerializeField] float coyoteTime = 0.1f;
-    //[SerializeField] float jumpBufferTime = 0.1f;
-    //private float coyoteTimeCounter;
-    //private float jumpBufferCounter;
 
     [Header("Fall Through")]
     [SerializeField] float fallSpeed = -10f;
@@ -42,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     InputAction crouchAction;
     InputAction dashAction;
 
-    void Start()
+    private void Start()
     {
         moveAction = InputSystem.actions.FindAction("Player/Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
@@ -54,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed = moveSpeed;
     }
 
-    void Update()
+    private void Update()
     {
         if (canControlPlayer == true)
         {
@@ -71,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     #region Movement
-    void Movement()
+    private void Movement()
     {
         // Movement
         moveVector = moveAction.ReadValue<Vector2>();
@@ -90,17 +84,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Rotation
-        if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame)
+        if (moveVector.x < 0)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-        else if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasPressedThisFrame)
+        else if (moveVector.x > 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 
-    void FallThrough()
+    private void FallThrough()
     {
         if (Keyboard.current.sKey.wasPressedThisFrame)
         {
@@ -113,16 +107,18 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
     #region Jump & Coyote time
-    void Jump()
+    private void Jump()
     {
-        if (jumpAction.WasPressedThisFrame())
+        RaycastHit2D ground = Physics2D.Raycast(transform.position, Vector2.down, jumpDistance, groundLayer);
+
+        if (ground.collider != null)
         {
-            rb.linearVelocityY = jumpHeight;
+            if (jumpAction.WasPressedThisFrame())
+            {
+                rb.linearVelocityY = jumpHeight;
 
-            SoundManager.PlaySound(SoundType.Jump);
-
-            //coyoteTimeCounter = 0f;
-            //jumpBufferCounter = 0f;
+                SoundManager.PlaySound(SoundType.Jump);
+            }
         }
     }
     #endregion
@@ -167,7 +163,7 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
     #region Animations
-    void Animations()
+    private void Animations()
     {
         if (Mathf.Abs(rb.linearVelocity.x) > 0.1f)
         {

@@ -4,7 +4,7 @@ public class ProjectileDestroy : MonoBehaviour
 {
     private readonly float enemyProjectilePrefabDelay = 1f;
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         int layerIndex = LayerMask.NameToLayer("Wall");
 
@@ -12,7 +12,7 @@ public class ProjectileDestroy : MonoBehaviour
         {
             Destroy(other.gameObject, enemyProjectilePrefabDelay);
 
-            Debug.Log("Hello");
+            Debug.Log("Destroy");
         }
     }
 }

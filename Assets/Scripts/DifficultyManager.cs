@@ -71,8 +71,8 @@ public class DifficultyManager : MonoBehaviour
                 batHealth = 10f;
                 batDamage = 5;
                 gombaHealth = 10f;
-                gombaDamage = 5;
-                skeletonHealth = 2f;
+                gombaDamage = 2;
+                skeletonHealth = 5f;
                 skeletonDamage = 5;
                 break;
 
@@ -80,7 +80,7 @@ public class DifficultyManager : MonoBehaviour
                 batHealth = 20f;
                 batDamage = 10;
                 gombaHealth = 20f;
-                gombaDamage = 10;
+                gombaDamage = 5;
                 skeletonHealth = 5f;
                 skeletonDamage = 10;
                 break;
@@ -89,7 +89,7 @@ public class DifficultyManager : MonoBehaviour
                 batHealth = 40f;
                 batDamage = 20;
                 gombaHealth = 40f;
-                gombaDamage = 20;
+                gombaDamage = 10;
                 skeletonHealth = 10f;
                 skeletonDamage = 20;
                 break;

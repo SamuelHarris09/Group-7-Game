@@ -26,9 +26,9 @@ public class EnemyHealth : MonoBehaviour
 
         if (damageDealer != null)
         {
-            int layerIndexC = LayerMask.NameToLayer("HitBox");
+            int layerIndex = LayerMask.NameToLayer("HitBox");
 
-            if (other.gameObject.layer == layerIndexC)
+            if (other.gameObject.layer == layerIndex)
             {
                 TakeDamage(damageDealer.GetDamage());
             }
@@ -45,7 +45,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    void TakeDamage(int damage)
+    private void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
